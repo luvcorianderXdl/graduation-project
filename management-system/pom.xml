@@ -12,7 +12,7 @@
     <artifactId>management-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>management-system</name>
-    <description>management-system</description>
+    <description>management-system4graduation-project</description>
     <properties>
         <java.version>8</java.version>
     </properties>
