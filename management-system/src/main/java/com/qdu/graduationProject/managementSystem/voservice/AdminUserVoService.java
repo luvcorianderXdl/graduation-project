@@ -19,13 +19,11 @@ public class AdminUserVoService {
     @Resource
     private AdminUserService adminUserService;
 
-    public JSONResult login(HttpSession session, LoginVo vo) throws Exception {
-        String username = vo.getName();
-        String password = vo.getPassword();
-        if("".equals(username)) {
+    public JSONResult login(String userName,String password,HttpSession session) throws Exception {
+        if("".equals(userName)) {
             throw new Exception("用户名禁止为空");
         } else {
-            AdminUser adminUser = adminUserService.login(username,password);
+            AdminUser adminUser = adminUserService.login(userName,password);
             if (adminUser == null) {
                 return JSONResult.error("登录失败");
             } else {

@@ -3,6 +3,7 @@ package com.qdu.graduationProject.managementSystem.interceptor;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import sun.security.util.Debug;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,13 +23,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         String servletPath = request.getServletPath();
         System.out.println("servletPath: " + servletPath);
         HttpSession session = request.getSession();
-        AdminUser adminUser = (AdminUser) session.getAttribute("user");
-        if (adminUser == null) {
-            // 获得需要登录才能访问的页面的路径
-            String uri = request.getRequestURI();
-            System.out.println(uri);
-            session.setAttribute("beforePath", uri);
-
+        AdminUser user = (AdminUser) session.getAttribute("user");
+        if (user == null) {
             response.sendRedirect(request.getContextPath() + "/user/getLoginPage");
             return false;
         }
@@ -46,3 +42,4 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println("LoginInterceptor.afterCompletion");
     }
 }
+
