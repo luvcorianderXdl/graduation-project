@@ -27,7 +27,7 @@ public class AdminUserVoService {
             if (adminUser == null) {
                 return JSONResult.error("登录失败");
             } else {
-                session.setAttribute("user", adminUser);
+                session.setAttribute("adminUser", adminUser);
                 return JSONResult.ok("登录成功");
             }
         }

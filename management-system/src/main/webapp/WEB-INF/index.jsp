@@ -8,25 +8,19 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">JAVA-0000</div>
+        <div class="layui-logo">后端管理系统-Nyl&Xdl</div>
         <ul class="layui-nav layui-layout-left">   </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <%-- 				        <img src="<%=path%>/img/fei.png" --%>
                     <!-- 				        class="layui-nav-img"/> -->
-                    用户${user.username}
+                    ${adminUser.name}
                     <%-- 				        	[${user.name}] --%>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="javascript:openUser()">基本资料</a>
-                    </dd>
-                    <dd>
                         <a href="javascript:openPass()">修改密码</a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:openPic()">修改头像</a>
                     </dd>
                 </dl>
             </li>
@@ -45,12 +39,12 @@
                         <dd>
                             <a href="javascript:;"
                                data-url="/product/getProudctListPage"
-                               class="site-demo-active">商品管理</a>
+                               class="site-demo-active">用户管理</a>
                         </dd>
                         <dd>
                             <a href="javascript:;"
                                data-url="<%=request.getContextPath()%>/teacher"
-                               class="site-demo-active">教师管理</a>
+                               class="site-demo-active">作品管理</a>
                         </dd>
                         <dd>
                             <a href="javascript:;"
@@ -105,7 +99,7 @@
             '您确认要退出么',
             {icon:3},
             function() {
-                location.href = '<%=request.getContextPath()%>/user/logout'
+                location.href = '<%=request.getContextPath()%>/adminUser/logout'
             }
         );
     }

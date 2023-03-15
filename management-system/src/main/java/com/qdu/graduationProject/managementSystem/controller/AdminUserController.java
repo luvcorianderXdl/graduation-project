@@ -1,6 +1,7 @@
 package com.qdu.graduationProject.managementSystem.controller;
 
 
+import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.managementSystem.voservice.AdminUserVoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/adminUser")
 public class AdminUserController {
     @Resource
     private AdminUserVoService adminUserVoService;
@@ -22,13 +23,13 @@ public class AdminUserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Object login(String name, String password, String code, HttpSession session) {
+    public Object login(String userName, String password, String code, HttpSession session) {
         String codeInSession = (String) session.getAttribute("codeInSession");
-//        if (!code.equalsIgnoreCase(codeInSession)) {
-//            return JSONResult.error("验证码错误");
-//        }
+        if (!code.equalsIgnoreCase(codeInSession)) {
+            return JSONResult.error("验证码错误");
+        }
         try {
-            return adminUserVoService.login(name, password,session);
+            return adminUserVoService.login(userName,password,session);
         } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();
@@ -38,6 +39,6 @@ public class AdminUserController {
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/user/getLoginPage";
+        return "redirect:/adminUser/getLoginPage";
     }
 }

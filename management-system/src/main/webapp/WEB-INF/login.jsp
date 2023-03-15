@@ -1,28 +1,48 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>登录</title>
     <%@ include file="header.jsp"%>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 </head>
 <body>
-<form id="formId" method="post">
-    用户名:<input type="text" name="username"/> <br/>
-    密码: <input type="password" name="password"/><br/>
-    验证码：<input type="text" name="code"/>
-    <img id="verigyCodeId" src="${pageContext.request.contextPath}/auth/code" onclick="refresh()"><br/>
-    <input type="button" onclick="submitForm()" value="登录"/>
-</form>
-
+<div class = "layui-container">
+    <div class="admin-login-background">
+        <div class="logo-title">
+            <h1>后端管理系统</h1>
+        </div>
+        <form id="formId" method="post" class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-icon layui-icon-username" for="username"></label>
+                <input type="text" id="username" name="userName" lay-verify="required|account" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-icon layui-icon-password" for="password"></label>
+                <input type="password" id="password" name="password" lay-verify="required|password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-icon layui-icon-vercode" for="captcha"></label>
+                <div class="code">
+                    <input id="captcha" type="text" name="code" lay-verify="required|captcha" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                    <img id="verifyCodeId" src="${pageContext.request.contextPath}/auth/code" onclick="refresh()"><br/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="logo-title">
+                    <input class="mylogin" type="button" onclick="submitForm()" value="登 录"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <script>
     function refresh() {
-        $('#verigyCodeId').attr('src', '${pageContext.request.contextPath}/auth/code?' + Math.random());
+        $('#verifyCodeId').attr('src', '${pageContext.request.contextPath}/auth/code?' + Math.random());
     }
 
     function submitForm() {
-        // {'name':'zhansgan', 'age':23}
-        // console.log($('#formId').serialize());
         $.post(
-            '/user/login',
+            '/adminUser/login',
             $('#formId').serialize(),
             function(jsonResult) {
                 console.log(jsonResult);
