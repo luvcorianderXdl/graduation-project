@@ -2,14 +2,14 @@ package com.qdu.graduationProject.managementSystem.controller;
 
 
 import com.qdu.graduationProject.managementSystem.voservice.AdminUserVoService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class AdminUserController {
     @Resource

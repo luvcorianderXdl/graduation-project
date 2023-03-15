@@ -1,13 +1,13 @@
 package com.qdu.graduationProject.managementSystem.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author xdl
  * @create 2023/3/13 11:21
  */
-@RestController
+@Controller
 public class IndexController {
     // 设置项目默认的首页（欢迎页）
     // http://localhost:8080/
