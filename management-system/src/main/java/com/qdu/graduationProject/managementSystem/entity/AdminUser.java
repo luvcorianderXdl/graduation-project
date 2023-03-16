@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author xdl
@@ -26,12 +27,29 @@ public class AdminUser implements Serializable {
     @Column(name = "login_id")
     private String loginId;
 
-    @Column(name = "password")
-    private String password;
+//    @Column(name = "password")
+//    private String password;
+//
+//    @Column(name = "salt")
+//    private String salt;
+
+    @Column(name= "tels")
+    private String tels;
+
+    @Column(name = "emails")
+    private String emails;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "create_time")
+    private Date createTime;
+
+    @Column(name = "deleteTime")
+    private Date deleteTime;
 
     @Column(name = "use_flag")
     private Integer useFlag;
 
-    @Column(name = "salt")
-    private String salt;
+
 }

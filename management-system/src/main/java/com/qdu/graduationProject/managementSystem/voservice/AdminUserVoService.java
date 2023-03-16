@@ -3,7 +3,7 @@ package com.qdu.graduationProject.managementSystem.voservice;
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.service.AdminUserService;
-import com.qdu.graduationProject.managementSystem.vo.LoginVo;
+import com.qdu.graduationProject.managementSystem.vo.AdminUserVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

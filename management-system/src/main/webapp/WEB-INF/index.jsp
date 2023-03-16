@@ -17,7 +17,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="javascript:changePassword()">修改用户信息</a>
+                        <a href="javascript:changePassword()">修改密码</a>
                     </dd>
                 </dl>
             </li>
@@ -45,7 +45,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/user_list.jsp"
+                               data-url="<%=request.getContextPath()%>/adminUser/findAll"
                                class="site-demo-active">管理员管理</a>
                         </dd>
                         <dd>
