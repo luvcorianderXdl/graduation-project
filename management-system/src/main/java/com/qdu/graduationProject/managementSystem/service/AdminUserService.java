@@ -17,8 +17,8 @@ public class AdminUserService {
     @Resource
     private AdminUserRepository adminUserRepository;
 
-    public AdminUser login(String username, String password) {
-        AdminUser adminUser = adminUserRepository.findByName(username);
+    public AdminUser login(String loginId, String password) {
+        AdminUser adminUser = adminUserRepository.findByLoginId(loginId);
         if(adminUser != null && adminUser.getPassword().equals(MD5Util.MD5Encode(password + adminUser.getSalt()))) {
             return adminUser;
         } else {

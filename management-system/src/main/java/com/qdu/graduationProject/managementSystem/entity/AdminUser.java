@@ -23,8 +23,14 @@ public class AdminUser implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "login_id")
+    private String loginId;
+
     @Column(name = "password")
     private String password;
+
+    @Column(name = "use_flag")
+    private Integer useFlag;
 
     @Column(name = "salt")
     private String salt;

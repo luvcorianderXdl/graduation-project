@@ -19,13 +19,13 @@ public class AdminUserVoService {
     @Resource
     private AdminUserService adminUserService;
 
-    public JSONResult login(String userName,String password,HttpSession session) throws Exception {
-        if("".equals(userName)) {
+    public JSONResult login(String loginId,String password,HttpSession session) throws Exception {
+        if("".equals(loginId)) {
             throw new Exception("用户名禁止为空");
         } else {
-            AdminUser adminUser = adminUserService.login(userName,password);
+            AdminUser adminUser = adminUserService.login(loginId,password);
             if (adminUser == null) {
-                return JSONResult.error("登录失败");
+                return JSONResult.error("用户名或密码错误");
             } else {
                 session.setAttribute("adminUser", adminUser);
                 return JSONResult.ok("登录成功");

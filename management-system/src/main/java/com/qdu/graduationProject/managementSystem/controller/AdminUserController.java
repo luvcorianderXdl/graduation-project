@@ -23,13 +23,13 @@ public class AdminUserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Object login(String userName, String password, String code, HttpSession session) {
+    public Object login(String loginId, String password, String code, HttpSession session) {
         String codeInSession = (String) session.getAttribute("codeInSession");
         if (!code.equalsIgnoreCase(codeInSession)) {
             return JSONResult.error("验证码错误");
         }
         try {
-            return adminUserVoService.login(userName,password,session);
+            return adminUserVoService.login(loginId,password,session);
         } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();

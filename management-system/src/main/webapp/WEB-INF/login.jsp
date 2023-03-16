@@ -14,7 +14,7 @@
         <form id="formId" method="post" class="layui-form">
             <div class="layui-form-item">
                 <label class="layui-icon layui-icon-username" for="username"></label>
-                <input type="text" id="username" name="userName" lay-verify="required|account" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                <input type="text" id="username" name="loginId" lay-verify="required|account" placeholder="请输入用户名" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <label class="layui-icon layui-icon-password" for="password"></label>
@@ -50,6 +50,7 @@
                     mylayer.okUrl(jsonResult.msg, '${pageContext.request.contextPath}/')
                 } else {
                     mylayer.errorMsg(jsonResult.msg);
+                    refresh();
                 }
             },
             'json'

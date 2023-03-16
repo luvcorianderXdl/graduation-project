@@ -13,14 +13,11 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <%-- 				        <img src="<%=path%>/img/fei.png" --%>
-                    <!-- 				        class="layui-nav-img"/> -->
                     ${adminUser.name}
-                    <%-- 				        	[${user.name}] --%>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="javascript:openPass()">修改密码</a>
+                        <a href="javascript:changePassword()">修改用户信息</a>
                     </dd>
                 </dl>
             </li>
@@ -78,7 +75,8 @@
         </div>
     </div>
     <div class="layui-body"><!-- 内容主体区域 -->
-        <iframe name="rightframe" width="99%" height="97%" src="<%=request.getContextPath()%>/echarts.jsp"></iframe>
+<%--        <iframe name="rightframe" width="99%" height="97%" src="<%=request.getContextPath()%>/echarts.jsp"></iframe>--%>
+
     </div>
     <div class="layui-footer">© JAVA - 底部固定区域</div>
 </div>
@@ -102,6 +100,9 @@
                 location.href = '<%=request.getContextPath()%>/adminUser/logout'
             }
         );
+    }
+    function changePassword() {
+
     }
 
 </script>

@@ -14,17 +14,6 @@ public class JSONResult {
     // 后台返回给前端的数据 Object， User、List<User>
     private Object data;
 
-
-	/*private boolean succ;
-
-	public boolean isSucc() {
-		return succ;
-	}
-
-	public void setSucc(boolean succ) {
-		this.succ = succ;
-	}*/
-
     // ok
     public boolean isOk() {
         return code == OK;
