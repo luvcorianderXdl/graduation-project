@@ -17,7 +17,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="javascript:changePassword()">修改密码</a>
+                        <a href="<%=request.getContextPath()%>/adminUser/cp">修改密码</a>
                     </dd>
                 </dl>
             </li>
@@ -101,9 +101,7 @@
             }
         );
     }
-    function changePassword() {
 
-    }
 
 </script>
 </body>

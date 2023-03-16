@@ -32,4 +32,12 @@ public class AdminUserVoService {
             }
         }
     }
+
+    public JSONResult changePassword(String loginId,String oldPass, String newPass, String confirmPass) throws Exception {
+        if(loginId == null ||oldPass == null ||newPass == null ||confirmPass == null) {
+            throw new Exception("请求参数错误");
+        }else {
+            return adminUserService.changePassword(loginId,oldPass,newPass,confirmPass);
+        }
+    }
 }

@@ -1,13 +1,13 @@
 package com.qdu.graduationProject.managementSystem.service;
 
+import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.MD5Util;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.repository.AdminUserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,6 +15,7 @@ import java.util.Map;
  * @create 2023/3/9 14:09
  */
 @Service
+@Transactional
 public class AdminUserService {
 
     @Resource
@@ -32,4 +33,18 @@ public class AdminUserService {
         return null;
     }
 
+    public JSONResult changePassword(String loginId,String oldPass, String newPass,String confirmPass) {
+        if (!newPass.equals(confirmPass)) {
+            return JSONResult.error("两次输入密码不一致");
+        } else {
+            Map<String, Object> passAndSalt = adminUserRepository.getLoginInfo(loginId);
+            if (passAndSalt != null && passAndSalt.get("password") != null && passAndSalt.get("salt") != null) {
+                if (passAndSalt.get("password").equals(MD5Util.MD5Encode(oldPass + passAndSalt.get("salt").toString()))) {
+                    adminUserRepository.changePassWord(loginId, MD5Util.MD5Encode(newPass + passAndSalt.get("salt").toString()));
+                    return JSONResult.ok("修改成功");
+                }
+            }
+            return JSONResult.error("密码错误");
+        }
+    }
 }

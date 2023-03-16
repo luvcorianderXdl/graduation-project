@@ -2,11 +2,12 @@ package com.qdu.graduationProject.managementSystem.repository;
 
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+
 import java.util.Map;
 
 
@@ -23,4 +24,7 @@ public interface AdminUserRepository extends JpaRepository<AdminUser,Long> {
     AdminUser findByLoginId(String loginId);
 
 
+    @Modifying
+    @Query(value = "update admin_user set password = :password where login_id = :loginId",nativeQuery = true)
+    void changePassWord(@Param("loginId") String loginId, @Param("password") String password);
 }
