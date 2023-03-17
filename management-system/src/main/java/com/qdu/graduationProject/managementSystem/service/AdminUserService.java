@@ -1,13 +1,20 @@
 package com.qdu.graduationProject.managementSystem.service;
 
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
+import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.commonUtils.utils.MD5Util;
+import com.qdu.graduationProject.commonUtils.utils.PageInfo;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.repository.AdminUserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,5 +53,17 @@ public class AdminUserService {
             }
             return JSONResult.error("密码错误");
         }
+    }
+
+    public LayUITableJSONResult getByPage(Integer pageNo, Integer pageSize) throws Exception {
+        Integer offset = (pageNo -1 ) *pageSize;
+        Integer totalCount = adminUserRepository.getTotalCount();
+        if(totalCount < offset) {
+            throw new Exception("请求参数错误");
+        }
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        Pageable pageable= PageRequest.of(pageNo - 1, pageSize, sort );
+        Page<AdminUser> list = adminUserRepository.findAll(pageable);
+        return LayUITableJSONResult.ok(totalCount,list.getContent());
     }
 }

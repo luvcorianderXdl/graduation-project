@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -27,4 +28,10 @@ public interface AdminUserRepository extends JpaRepository<AdminUser,Long> {
     @Modifying
     @Query(value = "update admin_user set password = :password where login_id = :loginId",nativeQuery = true)
     void changePassWord(@Param("loginId") String loginId, @Param("password") String password);
+
+    @Query(value = "select count(id) from admin_user",nativeQuery = true)
+    Integer getTotalCount();
+
+//    @Query(value = "select au from AdminUser LIMIT :offset,:size")
+//    List<AdminUser> getByPage(@Param("begin") Integer offset, @Param("size") Integer pageSize);
 }

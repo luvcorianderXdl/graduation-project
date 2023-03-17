@@ -2,6 +2,8 @@ package com.qdu.graduationProject.managementSystem.controller;
 
 
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
+import com.qdu.graduationProject.commonUtils.utils.JSONUtil;
+import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.voservice.AdminUserVoService;
 import org.springframework.stereotype.Controller;
@@ -28,16 +30,15 @@ public class AdminUserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Object login(String loginId, String password, String code, HttpSession session) {
-//        String codeInSession = (String) session.getAttribute("codeInSession");
-//        if (!code.equalsIgnoreCase(codeInSession)) {
-//            return JSONResult.error("验证码错误");
-//        }
-        try {
-            return adminUserVoService.login(loginId,password,session);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
+    public void login(HttpServletRequest req, HttpServletResponse resp) {
+//        String code = req.getParameter("code");
+        HttpSession session = req.getSession();
+        String codeInSession = (String) session.getAttribute("codeInSession");
+        String code = (String) session.getAttribute("codeInSession");
+        if (!code.equalsIgnoreCase(codeInSession)) {
+            JSONUtil.toJson(resp,JSONResult.error("验证码错误"));
+        } else{
+            adminUserVoService.login(req,resp);
         }
     }
 
@@ -51,7 +52,7 @@ public class AdminUserController {
     @RequestMapping("/cp")
     public void cp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        return "forward:/WEB-INF/changePassword.jsp";
-        req.getRequestDispatcher("/WEB-INF/changePassword.jsp").forward(req,resp);
+        req.getRequestDispatcher("/changePassword.jsp").forward(req,resp);
     }
     @RequestMapping("/changePassword")
     @ResponseBody
@@ -66,6 +67,16 @@ public class AdminUserController {
         } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();
+        }
+    }
+
+    @RequestMapping("/selectByPage")
+    public void getByPage(HttpServletRequest req, HttpServletResponse resp){
+        try {
+            LayUITableJSONResult result = adminUserVoService.getByPage(req,resp);
+            JSONUtil.toJson(resp,result);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

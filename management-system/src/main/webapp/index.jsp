@@ -6,6 +6,8 @@
     <%@ include file="header.jsp"%>
 </head>
 <body class="layui-layout-body">
+<script type="text/javascript">
+</script>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">后端管理系统-Nyl&Xdl</div>
@@ -17,7 +19,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="<%=request.getContextPath()%>/adminUser/cp">修改密码</a>
+                        <a class="site-demo-active"  data-url="<%=request.getContextPath()%>/adminUser/cp" href="javascript:;">修改密码</a>
                     </dd>
                 </dl>
             </li>
@@ -45,7 +47,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/adminUser/findAll"
+                               data-url="<%=request.getContextPath()%>/adminUser_list.jsp"
                                class="site-demo-active">管理员管理</a>
                         </dd>
                         <dd>
@@ -76,6 +78,7 @@
     </div>
     <div class="layui-body"><!-- 内容主体区域 -->
 <%--        <iframe name="rightframe" width="99%" height="97%" src="<%=request.getContextPath()%>/echarts.jsp"></iframe>--%>
+        <iframe name="rightframe" width="99%" height="97%"></iframe>
 
     </div>
     <div class="layui-footer">© JAVA - 底部固定区域</div>
