@@ -49,11 +49,6 @@ public class AdminUserController {
         resp.sendRedirect(req.getContextPath()+"/adminUser/getLoginPage");
     }
 
-    @RequestMapping("/cp")
-    public void cp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        return "forward:/WEB-INF/changePassword.jsp";
-        req.getRequestDispatcher("/changePassword.jsp").forward(req,resp);
-    }
     @RequestMapping("/changePassword")
     @ResponseBody
     public Object changePassword(String oldPass,String newPass,String confirmPass,HttpSession session){

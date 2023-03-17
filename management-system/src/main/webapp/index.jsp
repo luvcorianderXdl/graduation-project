@@ -19,7 +19,8 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a class="site-demo-active"  data-url="<%=request.getContextPath()%>/adminUser/cp" href="javascript:;">修改密码</a>
+<%--                        <a class="site-demo-active"  data-url="<%=request.getContextPath()%>/adminUser/cp" href="javascript:;">修改密码</a>--%>
+                        <a href="javascript:changePass()">修改密码</a>
                     </dd>
                 </dl>
             </li>
@@ -105,6 +106,17 @@
         );
     }
 
+    function changePass() {
+        layer.open({
+            type: 2,
+            title: "修改密码",
+            area: ['550px', '350px'],
+            //转发式
+            <%--content: '${pageContext.request.contextPath}/adminUser/getChangePassPage?id=' + id--%>
+            //直接访问
+            content: '<%=request.getContextPath()%>/changePassword.jsp'
+        });
+    }
 
 </script>
 </body>
