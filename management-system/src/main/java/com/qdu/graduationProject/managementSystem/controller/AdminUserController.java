@@ -42,15 +42,16 @@ public class AdminUserController {
     }
 
     @RequestMapping("/logout")
-    public String logout(HttpSession session) {
+    public void logout(HttpServletRequest req, HttpServletResponse resp,HttpSession session) throws IOException {
         session.invalidate();
-        return "redirect:/adminUser/getLoginPage";
+//        return "redirect:/adminUser/getLoginPage";
+        resp.sendRedirect(req.getContextPath()+"/adminUser/getLoginPage");
     }
 
     @RequestMapping("/cp")
-    public String cp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        return "forward:/WEB-INF/changePassword.jsp";
-//        req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+    public void cp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        return "forward:/WEB-INF/changePassword.jsp";
+        req.getRequestDispatcher("/WEB-INF/changePassword.jsp").forward(req,resp);
     }
     @RequestMapping("/changePassword")
     @ResponseBody
@@ -67,4 +68,5 @@ public class AdminUserController {
             return e.getMessage();
         }
     }
+
 }
