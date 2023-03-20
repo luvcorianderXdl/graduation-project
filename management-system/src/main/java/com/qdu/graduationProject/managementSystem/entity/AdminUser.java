@@ -43,10 +43,10 @@ public class AdminUser implements Serializable {
     private String description;
 
     @Column(name = "create_time")
-    private Date createTime;
+    private String createTime;
 
     @Column(name = "deleteTime")
-    private Date deleteTime;
+    private String deleteTime;
 
     @Column(name = "use_flag")
     private Integer useFlag;

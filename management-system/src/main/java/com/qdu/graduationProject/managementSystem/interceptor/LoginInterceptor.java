@@ -22,11 +22,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     // 返回false：代表没有登录，请求被拦截
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        System.out.println("LoginInterceptor.preHandle");
         logger.info("LoginInterceptor.preHandle");
         String servletPath = request.getServletPath();
         logger.info("servletPath: " + servletPath);
-//        System.out.println("servletPath: " + servletPath);
         HttpSession session = request.getSession();
         AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
         if (adminUser == null) {
@@ -40,13 +38,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         logger.debug("LoginInterceptor.postHandle");
-//        System.out.println("LoginInterceptor.postHandle");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         logger.debug("LoginInterceptor.afterCompletion");
-//        System.out.println("LoginInterceptor.afterCompletion");
     }
 }
 

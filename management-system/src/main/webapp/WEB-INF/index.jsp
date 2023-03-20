@@ -48,7 +48,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/adminUser_list.jsp"
+                               data-url="<%=request.getContextPath()%>/adminUser/getAdminUserListPage"
                                class="site-demo-active">管理员管理</a>
                         </dd>
                         <dd>
@@ -110,11 +110,11 @@
         layer.open({
             type: 2,
             title: "修改密码",
-            area: ['550px', '350px'],
-            //转发式
-            <%--content: '${pageContext.request.contextPath}/adminUser/getChangePassPage?id=' + id--%>
-            //直接访问
-            content: '<%=request.getContextPath()%>/changePassword.jsp'
+            area: ['400px', '300px'],
+            //转发式(jsp位于WEB-INF)
+            content: '${pageContext.request.contextPath}/adminUser/getChangePasswordPage'
+            //直接访问(jsp位于webapp直接下级 不建议使用)
+            <%--content: '<%=request.getContextPath()%>/changePassword.jsp'--%>
         });
     }
 

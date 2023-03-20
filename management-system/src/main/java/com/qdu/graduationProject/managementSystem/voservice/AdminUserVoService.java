@@ -3,10 +3,9 @@ package com.qdu.graduationProject.managementSystem.voservice;
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.JSONUtil;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
-import com.qdu.graduationProject.commonUtils.utils.PageInfo;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.service.AdminUserService;
-import com.qdu.graduationProject.managementSystem.vo.AdminUserVo;
+import com.qdu.graduationProject.managementSystem.vo.AddAdminUserVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,9 +40,9 @@ public class AdminUserVoService {
         }
     }
 
-    public JSONResult changePassword(String loginId,String oldPass, String newPass, String confirmPass) throws Exception {
-        if(loginId == null ||oldPass == null ||newPass == null ||confirmPass == null) {
-            throw new Exception("请求参数错误");
+    public JSONResult changePassword(String loginId,String oldPass, String newPass, String confirmPass){
+        if(loginId == null ||oldPass == null ||newPass == null ||confirmPass == null||"".equals(loginId)||"".equals(oldPass)||"".equals(newPass)||"".equals(confirmPass)) {
+            return JSONResult.error("请求参数禁止为空");
         }else {
             return adminUserService.changePassword(loginId,oldPass,newPass,confirmPass);
         }
@@ -59,5 +58,24 @@ public class AdminUserVoService {
             pageSize = "10";
         }
         return adminUserService.getByPage(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
+    }
+
+    public JSONResult addAdminUser(AddAdminUserVo vo) {
+        if(vo.getName() == null||"".equals(vo.getName())) {
+            return JSONResult.error("用户名禁止为空");
+        }if(vo.getLoginId() == null||"".equals(vo.getLoginId())) {
+            return JSONResult.error("登录Id禁止为空");
+        }if(vo.getTels() == null||"".equals(vo.getTels())) {
+            return JSONResult.error("手机号禁止为空");
+        }if(vo.getEmails() == null||"".equals(vo.getEmails())) {
+            return JSONResult.error("邮箱禁止为空");
+        }if(vo.getDescription() == null||"".equals(vo.getDescription())) {
+            return JSONResult.error("账号描述禁止为空");
+        }if(vo.getPassword() == null) {
+            return JSONResult.error("密码禁止为空");
+        }if(vo.getConfirmPass() == null) {
+            return JSONResult.error("确认密码禁止为空");
+        }
+        return adminUserService.addAdminUser(vo);
     }
 }

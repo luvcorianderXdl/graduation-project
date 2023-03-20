@@ -32,6 +32,10 @@ public interface AdminUserRepository extends JpaRepository<AdminUser,Long> {
     @Query(value = "select count(id) from admin_user",nativeQuery = true)
     Integer getTotalCount();
 
-//    @Query(value = "select au from AdminUser LIMIT :offset,:size")
-//    List<AdminUser> getByPage(@Param("begin") Integer offset, @Param("size") Integer pageSize);
+    @Query(value = "select login_id from admin_user where login_id = :loginId",nativeQuery = true)
+    List<String> getSameLoginIds(@Param("loginId") String loginId);
+
+    @Modifying
+    @Query(value = "update admin_user set salt = :salt,password = :password where login_id = :loginId",nativeQuery = true)
+    void setSaltAndPassword(@Param("salt") String salt,@Param("password") String password,@Param("loginId") String loginId);
 }

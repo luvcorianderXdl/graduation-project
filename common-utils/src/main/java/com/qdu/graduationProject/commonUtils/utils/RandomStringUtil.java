@@ -5,7 +5,7 @@ package com.qdu.graduationProject.commonUtils.utils;
  * @create 2023/3/9 14:37
  */
 public class RandomStringUtil {
-    private static String randomString(int length) {
+    public static String randomString(int length) {
         String xx = "";
         for (short i = '0'; i <= '9'; i++) {
             xx += (char) i;

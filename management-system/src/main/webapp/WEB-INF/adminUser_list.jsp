@@ -84,8 +84,9 @@
                 case 'add':
                     layer.open({
                         type: 2,
-                        area: ['500px', '300px'],
-                        content: '${pageContext.request.contextPath}/adminUser_add.jsp'
+                        title: "添加管理员",
+                        area: ['430px', '500px'],
+                        content: '${pageContext.request.contextPath}/adminUser/getAdminUserPage'
                     });
 
                     break;

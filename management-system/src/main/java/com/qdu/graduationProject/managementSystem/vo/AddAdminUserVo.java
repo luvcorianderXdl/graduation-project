@@ -6,12 +6,12 @@ import lombok.Setter;
 
 /**
  * @author xdl
- * @create 2023/3/16 10:42
+ * @create 2023/3/20 11:37
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class AdminUserVo {
+public class AddAdminUserVo {
 
     String name;
 
@@ -23,5 +23,7 @@ public class AdminUserVo {
 
     String description;
 
-    String createTime;
+    String password;
+
+    String confirmPass;
 }
