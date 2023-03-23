@@ -3,7 +3,6 @@
 <head>
     <title>管理员管理</title>
     <%@ include file="header.jsp" %>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/layui/css/layui.css" media="all">
 </head>
 <body>
 <table class="layui-hide" id="test" lay-filter="layFilter"></table>
