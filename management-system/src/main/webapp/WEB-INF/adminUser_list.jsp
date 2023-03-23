@@ -50,11 +50,13 @@
         //行工具条
         table.on('tool(layFilter)', function (obj) {
             var data = obj.data;
+            var ids = [];
+            ids.push(data.id);
             if (obj.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
+                layer.confirm('请确认删除', function (index) {
                     $.post(
-                        '${pageContext.request.contextPath}/adminUser/deleteByIds',
-                        {'ids': data.id},
+                        '${pageContext.request.contextPath}/adminUser/deleteByIds?ids='+ids,
+                        // {'id': data.id},
                         function (jsonObj) {
                             console.log(jsonObj);
                             if (jsonObj.code == 0) {
@@ -96,10 +98,10 @@
                     $(data).each(function () {
                         ids.push(this.id);
                     });
-                    layer.confirm('确认删除', function (index) {
+                    layer.confirm('请确认删除', function (index) {
                         $.post(
-                            '${pageContext.request.contextPath}/adminUser/deleteByIds',
-                            {'ids': ids},
+                            '${pageContext.request.contextPath}/adminUser/deleteByIds?ids='+ids,
+                            // {'ids': ids},
                             function (jsonObj) {
                                 console.log(jsonObj);
                                 if (jsonObj.code == 0) {
@@ -108,6 +110,7 @@
                                     table.reload('tableId');
                                 } else {
                                     mylayer.errorMsg(jsonObj.msg);
+                                    table.reload('tableId');
                                 }
                             },
                             'json'

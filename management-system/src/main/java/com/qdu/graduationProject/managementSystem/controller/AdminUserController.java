@@ -8,6 +8,7 @@ import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.vo.AddAdminUserVo;
 import com.qdu.graduationProject.managementSystem.voservice.AdminUserVoService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/adminUser")
@@ -90,5 +92,11 @@ public class AdminUserController {
         return adminUserVoService.addAdminUser(vo);
     }
 
-
+    @RequestMapping("/deleteByIds")
+    @ResponseBody
+    public Object deleteByIds(HttpServletRequest req,String ids) {
+        HttpSession session = req.getSession();
+        AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
+        return adminUserVoService.deleteByIds(ids,adminUser.getId());
+    }
 }

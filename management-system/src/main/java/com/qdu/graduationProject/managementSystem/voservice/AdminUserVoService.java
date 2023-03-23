@@ -6,12 +6,17 @@ import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.service.AdminUserService;
 import com.qdu.graduationProject.managementSystem.vo.AddAdminUserVo;
+import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author xdl
@@ -77,5 +82,17 @@ public class AdminUserVoService {
             return JSONResult.error("确认密码禁止为空");
         }
         return adminUserService.addAdminUser(vo);
+    }
+
+    public JSONResult deleteByIds(String ids,Long id){
+        if(ids == null || "".equals(ids)){
+            return JSONResult.error("请选择用户");
+        }
+        String[] temp = ids.split(",");
+        List<Long> idList = new ArrayList<>();
+        for (String s : temp) {
+            idList.add(Long.parseLong(s));
+        }
+        return adminUserService.deleteById(idList,id);
     }
 }

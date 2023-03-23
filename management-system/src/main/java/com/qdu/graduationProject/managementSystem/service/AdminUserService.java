@@ -1,9 +1,6 @@
 package com.qdu.graduationProject.managementSystem.service;
 
-import com.qdu.graduationProject.commonUtils.utils.JSONResult;
-import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
-import com.qdu.graduationProject.commonUtils.utils.MD5Util;
-import com.qdu.graduationProject.commonUtils.utils.RandomStringUtil;
+import com.qdu.graduationProject.commonUtils.utils.*;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.repository.AdminUserRepository;
 import com.qdu.graduationProject.managementSystem.vo.AddAdminUserVo;
@@ -16,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -84,10 +82,8 @@ public class AdminUserService {
         adminUser.setTels(vo.getTels());
         adminUser.setEmails(vo.getEmails());
         adminUser.setDescription(vo.getDescription());
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = formatter.format(date);
-        adminUser.setCreateTime(formattedDate);
+        String createTime = DateUtil.getDate();
+        adminUser.setCreateTime(createTime);
         adminUser.setDeleteTime("");
         adminUser.setUseFlag(1);
         adminUserRepository.save(adminUser);
@@ -95,5 +91,24 @@ public class AdminUserService {
         String password = MD5Util.MD5Encode(vo.getPassword() + salt);
         adminUserRepository.setSaltAndPassword(salt,password,vo.getLoginId());
         return JSONResult.ok("用户添加完毕");
+    }
+
+    public JSONResult deleteById(List<Long> idList,Long id) {
+        //只调整没有删除的数据
+        List<Long> ids = new ArrayList<>();
+        idList.forEach(r ->{
+            if(adminUserRepository.getUseFlagById(r) == 1) {
+                ids.add(r);
+            }
+        });
+        if(ids.isEmpty()) {
+            return JSONResult.ok("已删除");
+        }
+        if(ids.contains(id)) {
+            return JSONResult.error("禁止删除本人");
+        }
+        String deleteTime = DateUtil.getDate();
+        adminUserRepository.deleteByIds(ids,deleteTime);
+        return JSONResult.ok("已删除");
     }
 }

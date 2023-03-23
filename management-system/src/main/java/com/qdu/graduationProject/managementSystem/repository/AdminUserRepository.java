@@ -38,4 +38,11 @@ public interface AdminUserRepository extends JpaRepository<AdminUser,Long> {
     @Modifying
     @Query(value = "update admin_user set salt = :salt,password = :password where login_id = :loginId",nativeQuery = true)
     void setSaltAndPassword(@Param("salt") String salt,@Param("password") String password,@Param("loginId") String loginId);
+
+    @Modifying
+    @Query(value = "update admin_user set delete_time = :deleteTime,use_flag = 0 where id in (:ids)",nativeQuery = true)
+    void deleteByIds(@Param("ids") List<Long> ids,@Param("deleteTime") String deleteTime);
+
+    @Query(value = "select use_flag from admin_user where id = :id",nativeQuery = true)
+    Integer getUseFlagById(@Param("id") Long id);
 }
