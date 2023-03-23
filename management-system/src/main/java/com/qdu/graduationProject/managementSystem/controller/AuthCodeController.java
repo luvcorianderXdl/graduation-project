@@ -20,8 +20,8 @@ import java.util.Random;
 @RequestMapping("/auth")
 public class AuthCodeController {
 
-    private char[] codeSequence = { 'A', '1','B', 'C', '2','D','3', 'E','4', 'F', '5','G','6', 'H', '7','I', '8','J',
-            'K',   '9' ,'L', '1','M',  '2','N',  'P', '3', 'Q', '4', 'R', 'S', 'T', 'U', 'V', 'W',
+    private char[] codeSequence = {'A', '1', 'B', 'C', '2', 'D', '3', 'E', '4', 'F', '5', 'G', '6', 'H', '7', 'I', '8', 'J',
+            'K', '9', 'L', '1', 'M', '2', 'N', 'P', '3', 'Q', '4', 'R', 'S', 'T', 'U', 'V', 'W',
             'X', 'Y', 'Z'};
 
     // /auth/code
@@ -42,10 +42,10 @@ public class AuthCodeController {
         Graphics g = image.getGraphics();
         //Graphics类的样式
         g.setColor(this.getColor(200, 250));
-        g.setFont(new Font("Times New Roman",0,28));
+        g.setFont(new Font("Times New Roman", 0, 28));
         g.fillRect(0, 0, width, height);
         //绘制干扰线
-        for(int i=0;i<40;i++){
+        for (int i = 0; i < 40; i++) {
             g.setColor(this.getColor(130, 200));
             int x = random.nextInt(width);
             int y = random.nextInt(height);
@@ -56,11 +56,11 @@ public class AuthCodeController {
 
         //绘制字符
         String strCode = "";
-        for(int i=0;i<4;i++){
+        for (int i = 0; i < 4; i++) {
             String rand = String.valueOf(codeSequence[random.nextInt(codeSequence.length)]);
             strCode = strCode + rand;
-            g.setColor(new Color(20+random.nextInt(110),20+random.nextInt(110),20+random.nextInt(110)));
-            g.drawString(rand, 13*i+6, 28);
+            g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
+            g.drawString(rand, 13 * i + 6, 28);
         }
         //将字符保存到session中用于前端的验证
         session.setAttribute("codeInSession", strCode.toLowerCase());
@@ -70,18 +70,18 @@ public class AuthCodeController {
         response.getOutputStream().flush();
     }
 
-    public  Color getColor(int fc,int bc){
+    public Color getColor(int fc, int bc) {
         Random random = new Random();
-        if(fc>255){
+        if (fc > 255) {
             fc = 255;
         }
-        if(bc>255) {
+        if (bc > 255) {
             bc = 255;
         }
         int r = fc + random.nextInt(bc - fc);
         int g = fc + random.nextInt(bc - fc);
         int b = fc + random.nextInt(bc - fc);
-        return new Color(r,g,b);
+        return new Color(r, g, b);
     }
 
 }

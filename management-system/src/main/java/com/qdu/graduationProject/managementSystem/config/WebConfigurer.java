@@ -28,7 +28,7 @@ public class WebConfigurer implements WebMvcConfigurer {
         // excludePathPatterns()   代表排除哪些请求不需要拦截
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/adminUser/login","/adminUser/getLoginPage", "/auth/code", "/error","/static/**");
+                .excludePathPatterns("/adminUser/login", "/adminUser/getLoginPage", "/auth/code", "/error", "/static/**");
     }
 
 }

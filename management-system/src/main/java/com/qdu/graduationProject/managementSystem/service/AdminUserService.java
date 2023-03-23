@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,17 +30,17 @@ public class AdminUserService {
 
     public AdminUser login(String loginId, String password) {
         //敏感信息不建议直接在entity出现
-        Map<String,Object> passAndSalt = adminUserRepository.getLoginInfo(loginId);
+        Map<String, Object> passAndSalt = adminUserRepository.getLoginInfo(loginId);
         AdminUser adminUser = adminUserRepository.findByLoginId(loginId);
-        if(adminUser != null && passAndSalt != null && passAndSalt.get("password") != null && passAndSalt.get("salt") != null) {
-            if(passAndSalt.get("password").equals(MD5Util.MD5Encode(password + passAndSalt.get("salt").toString()))) {
+        if (adminUser != null && passAndSalt != null && passAndSalt.get("password") != null && passAndSalt.get("salt") != null) {
+            if (passAndSalt.get("password").equals(MD5Util.MD5Encode(password + passAndSalt.get("salt").toString()))) {
                 return adminUser;
             }
         }
         return null;
     }
 
-    public JSONResult changePassword(String loginId,String oldPass, String newPass,String confirmPass) {
+    public JSONResult changePassword(String loginId, String oldPass, String newPass, String confirmPass) {
         if (!newPass.equals(confirmPass)) {
             return JSONResult.error("两次输入密码不一致");
         } else {
@@ -58,23 +56,23 @@ public class AdminUserService {
     }
 
     public LayUITableJSONResult getByPage(Integer pageNo, Integer pageSize) throws Exception {
-        Integer offset = (pageNo -1 ) *pageSize;
+        Integer offset = (pageNo - 1) * pageSize;
         Integer totalCount = adminUserRepository.getTotalCount();
-        if(totalCount < offset) {
+        if (totalCount < offset) {
             throw new Exception("请求参数错误");
         }
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
-        Pageable pageable= PageRequest.of(pageNo - 1, pageSize, sort );
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         Page<AdminUser> list = adminUserRepository.findAll(pageable);
-        return LayUITableJSONResult.ok(totalCount,list.getContent());
+        return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 
     public JSONResult addAdminUser(AddAdminUserVo vo) {
         List<String> loginIds = adminUserRepository.getSameLoginIds(vo.getLoginId());
-        if(!loginIds.isEmpty()) {
+        if (!loginIds.isEmpty()) {
             return JSONResult.error("登录id已存在");
         }
-        if(!vo.getPassword().equals(vo.getConfirmPass())){
+        if (!vo.getPassword().equals(vo.getConfirmPass())) {
             return JSONResult.error("确认密码错误");
         }
         AdminUser adminUser = new AdminUser();
@@ -90,26 +88,26 @@ public class AdminUserService {
         adminUserRepository.save(adminUser);
         String salt = RandomStringUtil.randomString(10);
         String password = MD5Util.MD5Encode(vo.getPassword() + salt);
-        adminUserRepository.setSaltAndPassword(salt,password,vo.getLoginId());
+        adminUserRepository.setSaltAndPassword(salt, password, vo.getLoginId());
         return JSONResult.ok("用户添加完毕");
     }
 
-    public JSONResult deleteById(List<Long> idList,Long id) {
+    public JSONResult deleteById(List<Long> idList, Long id) {
         //只调整没有删除的数据
         List<Long> ids = new ArrayList<>();
-        idList.forEach(r ->{
-            if(adminUserRepository.getUseFlagById(r) == 1) {
+        idList.forEach(r -> {
+            if (adminUserRepository.getUseFlagById(r) == 1) {
                 ids.add(r);
             }
         });
-        if(ids.isEmpty()) {
+        if (ids.isEmpty()) {
             return JSONResult.ok("已删除");
         }
-        if(ids.contains(id)) {
+        if (ids.contains(id)) {
             return JSONResult.error("禁止删除本人");
         }
         String deleteTime = DateUtil.getDate();
-        adminUserRepository.deleteByIds(ids,deleteTime);
+        adminUserRepository.deleteByIds(ids, deleteTime);
         return JSONResult.ok("已删除");
     }
 
@@ -118,7 +116,7 @@ public class AdminUserService {
     }
 
     public JSONResult updateAdminUser(UpdateAdminUserVo vo) {
-        adminUserRepository.updateAdminUser(vo.getId(),vo.getName(),vo.getTels(),vo.getEmails(),vo.getDescription());
+        adminUserRepository.updateAdminUser(vo.getId(), vo.getName(), vo.getTels(), vo.getEmails(), vo.getDescription());
         return JSONResult.ok("修改成功");
     }
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>管理员管理</title>
-    <%@ include file="header.jsp"%>
+    <%@ include file="header.jsp" %>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/layui/css/layui.css" media="all">
 </head>
 <body>
@@ -55,7 +55,7 @@
             if (obj.event === 'del') {
                 layer.confirm('请确认删除', function (index) {
                     $.post(
-                        '${pageContext.request.contextPath}/adminUser/deleteByIds?ids='+ids,
+                        '${pageContext.request.contextPath}/adminUser/deleteByIds?ids=' + ids,
                         // {'id': data.id},
                         function (jsonObj) {
                             console.log(jsonObj);
@@ -74,6 +74,7 @@
             } else if (obj.event === 'edit') {
                 layer.open({
                     type: 2,
+                    title: "编辑管理员",
                     area: ['550px', '350px'],
                     content: '${pageContext.request.contextPath}/adminUser/getUpdatePage?id=' + data.id
                 });
@@ -100,7 +101,7 @@
                     });
                     layer.confirm('请确认删除', function (index) {
                         $.post(
-                            '${pageContext.request.contextPath}/adminUser/deleteByIds?ids='+ids,
+                            '${pageContext.request.contextPath}/adminUser/deleteByIds?ids=' + ids,
                             // {'ids': ids},
                             function (jsonObj) {
                                 console.log(jsonObj);

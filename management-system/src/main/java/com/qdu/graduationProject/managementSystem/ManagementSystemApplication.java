@@ -18,5 +18,4 @@ public class ManagementSystemApplication {
         LOG.info("启动成功");
         LOG.info("地址:\thttp://localhost:{}", environment.getProperty("server.port"));
     }
-
 }

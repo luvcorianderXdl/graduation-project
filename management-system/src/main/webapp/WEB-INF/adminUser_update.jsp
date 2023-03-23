@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>修改管理员信息</title>
-    <%@ include file="header.jsp"%>
+    <%@ include file="header.jsp" %>
 </head>
 <body>
 <form id="formId" class="layui-form layui-form-pane" action="">

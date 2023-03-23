@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import sun.security.util.Debug;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpSession;
 public class LoginInterceptor implements HandlerInterceptor {
 
     public static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
+
     // 返回true：代表已经登录，就可以访问后台资源
     // 返回false：代表没有登录，请求被拦截
     @Override

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>修改密码</title>
-    <%@ include file="header.jsp"%>
+    <%@ include file="header.jsp" %>
 </head>
 <body>
 <form id="formId" class="layui-form layui-form-pane" action="">
@@ -41,7 +41,7 @@
         $.post(
             '/adminUser/changePassword',
             $('#formId').serialize(),
-            function(jsonResult) {
+            function (jsonResult) {
                 console.log(jsonResult);
                 if (jsonResult.code == 0) {
                     var index = parent.layer.getFrameIndex(window.name);

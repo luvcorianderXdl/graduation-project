@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     public static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+
     // 设置项目默认的首页（欢迎页）
     // http://localhost:8080/
     // 如果是80端口号，可以不用写
