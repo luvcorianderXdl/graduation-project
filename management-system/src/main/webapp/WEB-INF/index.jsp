@@ -114,7 +114,7 @@
             //转发式(jsp位于WEB-INF)
             content: '${pageContext.request.contextPath}/adminUser/getChangePasswordPage'
             //直接访问(jsp位于webapp直接下级 不建议使用)
-            <%--content: '<%=request.getContextPath()%>/changePassword.jsp'--%>
+            <%--content: '<%=request.getContextPath()%>/adminUser_changePassword.jsp'--%>
         });
     }
 

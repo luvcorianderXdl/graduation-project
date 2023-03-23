@@ -75,7 +75,7 @@
                 layer.open({
                     type: 2,
                     area: ['550px', '350px'],
-                    content: '${pageContext.request.contextPath}/adminUser/getUpdatePage&id=' + data.id
+                    content: '${pageContext.request.contextPath}/adminUser/getUpdatePage?id=' + data.id
                 });
             }
         });

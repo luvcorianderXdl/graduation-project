@@ -1,6 +1,8 @@
 package com.qdu.graduationProject.managementSystem.repository;
 
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
+import com.qdu.graduationProject.managementSystem.vo.UpdateAdminUserVo;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +26,7 @@ public interface AdminUserRepository extends JpaRepository<AdminUser,Long> {
 
     AdminUser findByLoginId(String loginId);
 
+    AdminUser getAdminUserById(Long id);
 
     @Modifying
     @Query(value = "update admin_user set password = :password where login_id = :loginId",nativeQuery = true)
@@ -45,4 +48,8 @@ public interface AdminUserRepository extends JpaRepository<AdminUser,Long> {
 
     @Query(value = "select use_flag from admin_user where id = :id",nativeQuery = true)
     Integer getUseFlagById(@Param("id") Long id);
+
+    @Modifying
+    @Query(value = "update admin_user set name = :name,tels = :tels,emails = :emails,description = :description where id = :id",nativeQuery = true)
+    void updateAdminUser(@Param("id") Long id,@Param("name") String name,@Param("tels") String tels,@Param("emails") String emails,@Param("description") String description);
 }

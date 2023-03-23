@@ -6,6 +6,7 @@ import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.service.AdminUserService;
 import com.qdu.graduationProject.managementSystem.vo.AddAdminUserVo;
+import com.qdu.graduationProject.managementSystem.vo.UpdateAdminUserVo;
 import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.stereotype.Service;
@@ -94,5 +95,27 @@ public class AdminUserVoService {
             idList.add(Long.parseLong(s));
         }
         return adminUserService.deleteById(idList,id);
+    }
+
+    public AdminUser getAdminUserById(String id) {
+        if(id != null && !"".equals(id)) {
+            return adminUserService.getAdminUserById(Long.parseLong(id));
+        }
+        return null;
+    }
+
+    public JSONResult updateAdminUser(UpdateAdminUserVo vo) throws Exception {
+        if(vo.getId() == null) {
+            throw new Exception("参数丢失");
+        }if(vo.getName() == null||"".equals(vo.getName())) {
+            return JSONResult.error("用户名禁止为空");
+        }if(vo.getTels() == null||"".equals(vo.getTels())) {
+            return JSONResult.error("手机号禁止为空");
+        }if(vo.getEmails() == null||"".equals(vo.getEmails())) {
+            return JSONResult.error("邮箱禁止为空");
+        }if(vo.getDescription() == null||"".equals(vo.getDescription())) {
+            return JSONResult.error("账号描述禁止为空");
+        }
+        return adminUserService.updateAdminUser(vo);
     }
 }

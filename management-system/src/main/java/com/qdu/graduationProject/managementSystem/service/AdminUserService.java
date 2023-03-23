@@ -4,6 +4,7 @@ import com.qdu.graduationProject.commonUtils.utils.*;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.repository.AdminUserRepository;
 import com.qdu.graduationProject.managementSystem.vo.AddAdminUserVo;
+import com.qdu.graduationProject.managementSystem.vo.UpdateAdminUserVo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -110,5 +111,14 @@ public class AdminUserService {
         String deleteTime = DateUtil.getDate();
         adminUserRepository.deleteByIds(ids,deleteTime);
         return JSONResult.ok("已删除");
+    }
+
+    public AdminUser getAdminUserById(Long id) {
+        return adminUserRepository.getAdminUserById(id);
+    }
+
+    public JSONResult updateAdminUser(UpdateAdminUserVo vo) {
+        adminUserRepository.updateAdminUser(vo.getId(),vo.getName(),vo.getTels(),vo.getEmails(),vo.getDescription());
+        return JSONResult.ok("修改成功");
     }
 }
