@@ -116,6 +116,10 @@ public class AdminUserService {
     }
 
     public JSONResult updateAdminUser(UpdateAdminUserVo vo) {
+        AdminUser adminUser = adminUserRepository.getAdminUserById(vo.getId());
+        if (adminUser.getUseFlag() == 0) {
+            return JSONResult.error("已删除用户,禁止编辑");
+        }
         adminUserRepository.updateAdminUser(vo.getId(), vo.getName(), vo.getTels(), vo.getEmails(), vo.getDescription());
         return JSONResult.ok("修改成功");
     }

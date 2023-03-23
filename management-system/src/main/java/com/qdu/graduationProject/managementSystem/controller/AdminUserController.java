@@ -47,9 +47,9 @@ public class AdminUserController {
 
     @RequestMapping("/getUpdatePage")
     public ModelAndView getUpdatePage(String id) {
-        AdminUser user = adminUserVoService.getAdminUserById(id);
+        AdminUser adminUser = adminUserVoService.getAdminUserById(id);
         ModelAndView modelAndView = new ModelAndView("adminUser_update");
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("adminUser", adminUser);
         return modelAndView;
     }
 

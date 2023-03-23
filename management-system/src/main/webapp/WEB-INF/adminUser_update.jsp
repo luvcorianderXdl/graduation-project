@@ -6,32 +6,33 @@
 </head>
 <body>
 <form id="formId" class="layui-form layui-form-pane" action="">
-    <input type="hidden" name="id" value="${user.id}"/>
+    <input type="hidden" name="id" value="${adminUser.id}"/>
     <div class="layui-form-item">
         <label class="layui-form-label">用户名</label>
         <div class="layui-input-block">
-            <input type="text" name="name" value="${user.name}" autocomplete="off" placeholder="请输入用户名"
+            <input type="text" name="name" value="${adminUser.name}" autocomplete="off" placeholder="请输入用户名"
                    class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">电话号码</label>
         <div class="layui-input-block">
-            <input type="text" name="tels" value="${user.tels}" autocomplete="off" placeholder="请输入电话号码"
+            <input type="text" name="tels" value="${adminUser.tels}" autocomplete="off" placeholder="请输入电话号码"
                    class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">邮箱</label>
         <div class="layui-input-block">
-            <input type="text" name="emails" value="${user.emails}" autocomplete="off" placeholder="请输入邮箱"
+            <input type="text" name="emails" value="${adminUser.emails}" autocomplete="off" placeholder="请输入邮箱"
                    class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">账号描述</label>
         <div class="layui-input-block">
-            <input type="text" name="description" value="${user.description}" autocomplete="off" placeholder="请输入账号描述"
+            <input type="text" name="description" value="${adminUser.description}" autocomplete="off"
+                   placeholder="请输入账号描述"
                    class="layui-input">
         </div>
     </div>
