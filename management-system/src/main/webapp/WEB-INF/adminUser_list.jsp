@@ -6,11 +6,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/layui/css/layui.css" media="all">
 </head>
 <body>
-<script src="<%=request.getContextPath()%>/static/jquery-2.1.4.js"></script>
-<script src="<%=request.getContextPath()%>/static/layui/layui.js" charset="utf-8"></script>
-<script src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
-<script src="<%=request.getContextPath()%>/static/mylayer.js"></script>
-
 <table class="layui-hide" id="test" lay-filter="layFilter"></table>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -25,7 +20,6 @@
 <script>
     layui.use('table', function () {
         var table = layui.table;
-
         table.render({
             elem: '#test'
             , url: '${pageContext.request.contextPath}/adminUser/selectByPage'
