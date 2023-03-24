@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * @author xdl
- * @create 2023/3/9 14:25
+ * @date 2023/3/9 14:25
  */
 @Repository
 public interface AdminUserRepository extends JpaRepository<AdminUser, Long> {

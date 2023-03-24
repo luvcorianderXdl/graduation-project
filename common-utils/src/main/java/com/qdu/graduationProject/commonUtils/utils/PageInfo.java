@@ -8,24 +8,24 @@ import java.util.List;
 
 /**
  * @author xdl
- * @create 2023/3/17 10:22
+ * @date 2023/3/17 10:22
  */
 @Getter
 @Setter
 @NoArgsConstructor
 public class PageInfo<T> {
-     List<T> list;
-     Integer totalPage;
-     Integer pageNo;
-     Integer pageSize;
+    List<T> list;
+    Integer totalPage;
+    Integer pageNo;
+    Integer pageSize;
 
-     @Override
-     public String toString(){
-          return "PageInfo{" +
-                  "list = " + list +
-                  "totalPage" + totalPage +
-                  ", pageNo=" + pageNo +
-                  ", pageSize=" + pageSize +
-                  "}";
-     }
+    @Override
+    public String toString() {
+        return "PageInfo{" +
+                "list = " + list +
+                "totalPage" + totalPage +
+                ", pageNo=" + pageNo +
+                ", pageSize=" + pageSize +
+                "}";
+    }
 }

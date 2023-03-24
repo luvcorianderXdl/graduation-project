@@ -16,6 +16,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * @author xdl
+ * @date 2023/3/9 12:16
+ */
 @Controller
 @RequestMapping("/auth")
 public class AuthCodeController {

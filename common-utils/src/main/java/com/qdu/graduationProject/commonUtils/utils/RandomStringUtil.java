@@ -2,7 +2,7 @@ package com.qdu.graduationProject.commonUtils.utils;
 
 /**
  * @author xdl
- * @create 2023/3/9 14:37
+ * @date 2023/3/9 14:37
  */
 public class RandomStringUtil {
     public static String randomString(int length) {

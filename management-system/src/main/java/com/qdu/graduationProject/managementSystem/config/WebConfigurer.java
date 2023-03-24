@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author xdl
- * @create 2023/3/9 12:21
+ * @date 2023/3/9 12:21
  */
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {

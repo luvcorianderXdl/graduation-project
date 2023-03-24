@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author xdl
- * @create 2023/3/13 11:21
+ * @date 2023/3/13 11:21
  */
 @Controller
 public class IndexController {

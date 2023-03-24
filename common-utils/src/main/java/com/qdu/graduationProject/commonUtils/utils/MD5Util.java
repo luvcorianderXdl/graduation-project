@@ -2,7 +2,7 @@ package com.qdu.graduationProject.commonUtils.utils;
 
 /**
  * @author xdl
- * @create 2023/3/9 9:42
+ * @date 2023/3/9 9:42
  */
 
 import java.security.MessageDigest;
@@ -23,7 +23,7 @@ public class MD5Util {
 
     private static String byteToHexString(byte b) {
         int n = b;
-        if (n < 0){
+        if (n < 0) {
             n += 256;
         }
         int d1 = n / 16;
@@ -62,7 +62,7 @@ public class MD5Util {
             "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
 
     public static void main(String[] args) {
-        System.out.println(MD5Util.MD5Encode("root"+"Jdbi7z2obE"));
+        System.out.println(MD5Util.MD5Encode("root" + "Jdbi7z2obE"));
     }
 
 }
