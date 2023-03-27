@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -41,12 +42,12 @@ public interface AdminUserRepository extends JpaRepository<AdminUser, Long> {
 
     @Modifying
     @Query(value = "update admin_user set delete_time = :deleteTime,use_flag = 0 where id in (:ids)", nativeQuery = true)
-    void deleteByIds(@Param("ids") List<Long> ids, @Param("deleteTime") String deleteTime);
+    void deleteByIds(@Param("ids") List<Long> ids, @Param("deleteTime") Timestamp deleteTime);
 
     @Query(value = "select use_flag from admin_user where id = :id", nativeQuery = true)
     Integer getUseFlagById(@Param("id") Long id);
 
     @Modifying
-    @Query(value = "update admin_user set name = :name,tels = :tels,emails = :emails,description = :description where id = :id", nativeQuery = true)
-    void updateAdminUser(@Param("id") Long id, @Param("name") String name, @Param("tels") String tels, @Param("emails") String emails, @Param("description") String description);
+    @Query(value = "update admin_user set name = :name,tels = :tels,emails = :emails,description = :description,modify_time = :modifyTime where id = :id", nativeQuery = true)
+    void updateAdminUser(@Param("id") Long id, @Param("name") String name, @Param("tels") String tels, @Param("emails") String emails, @Param("description") String description, @Param("modifyTime") Timestamp modifyTime);
 }

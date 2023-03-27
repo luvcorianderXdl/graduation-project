@@ -1,10 +1,12 @@
 package com.qdu.graduationProject.managementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * @author xdl
@@ -42,10 +44,19 @@ public class AdminUser implements Serializable {
     private String description;
 
     @Column(name = "create_time")
-    private String createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Timestamp createTime;
+
+    @Column(name = "modify_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Timestamp modifyTime;
 
     @Column(name = "deleteTime")
-    private String deleteTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Timestamp deleteTime;
+
+    @Column(name = "modify_user_id")
+    private Long modifyUserId;
 
     @Column(name = "use_flag")
     private Integer useFlag;

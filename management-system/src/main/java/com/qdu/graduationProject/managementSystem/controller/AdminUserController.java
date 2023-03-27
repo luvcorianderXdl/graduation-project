@@ -75,7 +75,6 @@ public class AdminUserController {
     @RequestMapping("/logout")
     public void logout(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException {
         session.invalidate();
-//        return "redirect:/adminUser/getLoginPage";
         resp.sendRedirect(req.getContextPath() + "/adminUser/getLoginPage");
     }
 
@@ -102,8 +101,9 @@ public class AdminUserController {
 
     @RequestMapping("/addAdminUser")
     @ResponseBody
-    public Object addAdminUser(AddAdminUserVo vo) {
-        return adminUserVoService.addAdminUser(vo);
+    public Object addAdminUser(HttpServletRequest req, AddAdminUserVo vo) {
+        Long modifyUserId = ((AdminUser) req.getSession().getAttribute("adminUser")).getId();
+        return adminUserVoService.addAdminUser(modifyUserId, vo);
     }
 
     @RequestMapping("/deleteByIds")

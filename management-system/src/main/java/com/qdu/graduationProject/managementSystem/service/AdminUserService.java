@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,7 @@ public class AdminUserService {
             Map<String, Object> passAndSalt = adminUserRepository.getLoginInfo(loginId);
             if (passAndSalt != null && passAndSalt.get("password") != null && passAndSalt.get("salt") != null) {
                 if (passAndSalt.get("password").equals(MD5Util.MD5Encode(oldPass + passAndSalt.get("salt").toString()))) {
+
                     adminUserRepository.changePassWord(loginId, MD5Util.MD5Encode(newPass + passAndSalt.get("salt").toString()));
                     return JSONResult.ok("修改成功,即将重新登录");
                 }
@@ -56,6 +58,7 @@ public class AdminUserService {
     }
 
     public LayUITableJSONResult getByPage(Integer pageNo, Integer pageSize) throws Exception {
+        
         Integer offset = (pageNo - 1) * pageSize;
         Integer totalCount = adminUserRepository.getTotalCount();
         if (totalCount < offset) {
@@ -67,7 +70,7 @@ public class AdminUserService {
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 
-    public JSONResult addAdminUser(AddAdminUserVo vo) {
+    public JSONResult addAdminUser(Long modifyUserId, AddAdminUserVo vo) {
         List<String> loginIds = adminUserRepository.getSameLoginIds(vo.getLoginId());
         if (!loginIds.isEmpty()) {
             return JSONResult.error("登录id已存在");
@@ -81,9 +84,11 @@ public class AdminUserService {
         adminUser.setTels(vo.getTels());
         adminUser.setEmails(vo.getEmails());
         adminUser.setDescription(vo.getDescription());
-        String createTime = DateUtil.getDate();
-        adminUser.setCreateTime(createTime);
-        adminUser.setDeleteTime("");
+        Timestamp addTime = DateUtil.getCurrentTimestamp();
+        adminUser.setCreateTime(addTime);
+        adminUser.setModifyTime(null);
+        adminUser.setDeleteTime(null);
+        adminUser.setModifyUserId(modifyUserId);
         adminUser.setUseFlag(1);
         adminUserRepository.save(adminUser);
         String salt = RandomStringUtil.randomString(10);
@@ -106,7 +111,7 @@ public class AdminUserService {
         if (ids.contains(id)) {
             return JSONResult.error("禁止删除本人");
         }
-        String deleteTime = DateUtil.getDate();
+        Timestamp deleteTime = DateUtil.getCurrentTimestamp();
         adminUserRepository.deleteByIds(ids, deleteTime);
         return JSONResult.ok("已删除");
     }
@@ -120,7 +125,7 @@ public class AdminUserService {
         if (adminUser.getUseFlag() == 0) {
             return JSONResult.error("已删除用户,禁止编辑");
         }
-        adminUserRepository.updateAdminUser(vo.getId(), vo.getName(), vo.getTels(), vo.getEmails(), vo.getDescription());
+        adminUserRepository.updateAdminUser(vo.getId(), vo.getName(), vo.getTels(), vo.getEmails(), vo.getDescription(), DateUtil.getCurrentTimestamp());
         return JSONResult.ok("修改成功");
     }
 }

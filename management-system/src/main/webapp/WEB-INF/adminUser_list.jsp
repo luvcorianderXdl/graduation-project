@@ -23,18 +23,20 @@
             elem: '#test'
             , url: '${pageContext.request.contextPath}/adminUser/selectByPage'
             , toolbar: '#toolbarDemo'
-            , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            // , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'ID', sort: true}
-                , {field: 'name', title: '用户名'}
+                , {field: 'id', title: 'ID', sort: true, width: 80}
+                , {field: 'name', title: '用户名', width: 150}
                 , {field: 'loginId', title: '登录ID'}
                 , {field: 'tels', title: '手机号'}
                 , {field: 'emails', title: '邮箱'}
                 , {field: 'description', title: '账号描述'}
-                , {field: 'createTime', title: '创建时间'}
-                , {field: 'deleteTime', title: '删除时间'}
-                , {field: 'useFlag', title: '账号状态'}
+                , {field: 'createTime', title: '创建时间', width: 170}
+                , {field: 'modifyTime', title: '修改时间', width: 170}
+                , {field: 'deleteTime', title: '删除时间', width: 170}
+                , {field: 'modifyUserId', title: '修改人', width: 80}
+                , {field: 'useFlag', title: '状态', width: 80}
                 , {title: '操作', toolbar: '#barDemo'}
             ]]
             , page: true

@@ -34,18 +34,8 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;">信息维护</a>
+                    <a href="javascript:;">人员管理</a>
                     <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="/product/getProudctListPage"
-                               class="site-demo-active">用户管理</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/teacher"
-                               class="site-demo-active">作品管理</a>
-                        </dd>
                         <dd>
                             <a href="javascript:;"
                                data-url="<%=request.getContextPath()%>/adminUser/getAdminUserListPage"
@@ -53,24 +43,32 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/echarts.jsp"
-                               class="site-demo-active">统计图表</a>
+                               data-url="/product/getProudctListPage"
+                               class="site-demo-active">用户管理</a>
                         </dd>
-
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">基础配置</a>
+                    <a href="javascript:;">数据管理</a>
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="javascript:;"
-                               class="site-demo-active"
-                               data-url="/com.situ.web/page/dict/dictlist.jsp">
-                                基础数据维护</a>
+                               data-url="<%=request.getContextPath()%>/teacher"
+                               class="site-demo-active">作品管理</a>
                         </dd>
                         <dd>
-                            <a href="javascript:;" class="site-demo-active"
-                               data-url="/com.situ.web/404.jsp">404-1</a>
+                            <a href="javascript:;"
+                               data-url="<%=request.getContextPath()%>/teacher"
+                               class="site-demo-active">板块管理</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;"
+                               data-url="<%=request.getContextPath()%>/teacher"
+                               class="site-demo-active">标签管理</a>
+                        </dd>
+                        <a href="javascript:;"
+                           data-url="<%=request.getContextPath()%>/teacher"
+                           class="site-demo-active">评论管理</a>
                         </dd>
                     </dl>
                 </li>
