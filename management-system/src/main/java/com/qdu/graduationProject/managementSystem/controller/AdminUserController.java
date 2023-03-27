@@ -101,9 +101,8 @@ public class AdminUserController {
 
     @RequestMapping("/addAdminUser")
     @ResponseBody
-    public Object addAdminUser(HttpServletRequest req, AddAdminUserVo vo) {
-        Long modifyUserId = ((AdminUser) req.getSession().getAttribute("adminUser")).getId();
-        return adminUserVoService.addAdminUser(modifyUserId, vo);
+    public Object addAdminUser(AddAdminUserVo vo) {
+        return adminUserVoService.addAdminUser(vo);
     }
 
     @RequestMapping("/deleteByIds")

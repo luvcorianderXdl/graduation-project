@@ -68,7 +68,7 @@ public class AdminUserVoService {
         }
     }
 
-    public JSONResult addAdminUser(Long modifyUserId, AddAdminUserVo vo) {
+    public JSONResult addAdminUser(AddAdminUserVo vo) {
         if (vo.getName() == null || "".equals(vo.getName())) {
             return JSONResult.error("用户名禁止为空");
         }
@@ -90,7 +90,7 @@ public class AdminUserVoService {
         if (vo.getConfirmPass() == null) {
             return JSONResult.error("确认密码禁止为空");
         }
-        return adminUserService.addAdminUser(modifyUserId, vo);
+        return adminUserService.addAdminUser(vo);
     }
 
     public JSONResult deleteByIds(String ids, Long id) {

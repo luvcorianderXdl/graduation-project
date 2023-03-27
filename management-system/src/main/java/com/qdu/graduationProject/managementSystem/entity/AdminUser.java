@@ -54,10 +54,7 @@ public class AdminUser implements Serializable {
     @Column(name = "deleteTime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp deleteTime;
-
-    @Column(name = "modify_user_id")
-    private Long modifyUserId;
-
+    
     @Column(name = "use_flag")
     private Integer useFlag;
 

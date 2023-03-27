@@ -58,7 +58,7 @@ public class AdminUserService {
     }
 
     public LayUITableJSONResult getByPage(Integer pageNo, Integer pageSize) throws Exception {
-        
+
         Integer offset = (pageNo - 1) * pageSize;
         Integer totalCount = adminUserRepository.getTotalCount();
         if (totalCount < offset) {
@@ -70,7 +70,7 @@ public class AdminUserService {
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 
-    public JSONResult addAdminUser(Long modifyUserId, AddAdminUserVo vo) {
+    public JSONResult addAdminUser(AddAdminUserVo vo) {
         List<String> loginIds = adminUserRepository.getSameLoginIds(vo.getLoginId());
         if (!loginIds.isEmpty()) {
             return JSONResult.error("登录id已存在");
@@ -88,7 +88,6 @@ public class AdminUserService {
         adminUser.setCreateTime(addTime);
         adminUser.setModifyTime(null);
         adminUser.setDeleteTime(null);
-        adminUser.setModifyUserId(modifyUserId);
         adminUser.setUseFlag(1);
         adminUserRepository.save(adminUser);
         String salt = RandomStringUtil.randomString(10);
@@ -124,6 +123,9 @@ public class AdminUserService {
         AdminUser adminUser = adminUserRepository.getAdminUserById(vo.getId());
         if (adminUser.getUseFlag() == 0) {
             return JSONResult.error("已删除用户,禁止编辑");
+        }
+        if (vo.getName().equals(adminUser.getName()) && vo.getEmails().equals(adminUser.getEmails()) && vo.getTels().equals(adminUser.getTels()) && vo.getDescription().equals(adminUser.getDescription())) {
+            return JSONResult.ok("修改成功");
         }
         adminUserRepository.updateAdminUser(vo.getId(), vo.getName(), vo.getTels(), vo.getEmails(), vo.getDescription(), DateUtil.getCurrentTimestamp());
         return JSONResult.ok("修改成功");
