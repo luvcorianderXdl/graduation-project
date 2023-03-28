@@ -43,7 +43,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="/product/getProudctListPage"
+                               data-url="/user/getUserListPage"
                                class="site-demo-active">用户管理</a>
                         </dd>
                     </dl>

@@ -44,7 +44,7 @@ public class AdminUserController {
         return "adminUser_changePassword";
     }
 
-    @RequestMapping("/getAdminUserPage")
+    @RequestMapping("/getAddPage")
     public String getAdminUserPage() {
         return "adminUser_add";
     }

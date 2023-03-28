@@ -1,7 +1,7 @@
 package com.qdu.graduationProject.managementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -14,7 +14,6 @@ import java.sql.Timestamp;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 @Table(name = "u_user")
 @Entity
 public class User implements Serializable {
@@ -51,10 +50,16 @@ public class User implements Serializable {
     private String sessionKey;
 
     @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp createTime;
 
     @Column(name = "modify_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp modifyTime;
+
+    @Column(name = "delete_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Timestamp deleteTime;
 
     @Column(name = "use_flag")
     private Integer useFlag;
