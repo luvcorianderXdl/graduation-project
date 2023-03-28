@@ -5,49 +5,27 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * @author xdl
- * @date 2023/3/23 16:59
+ * @date 2023/3/28 16:55
  */
 @Getter
 @Setter
-@Table(name = "u_user")
+@Table(name = "s_section")
 @Entity
-public class User implements Serializable {
+public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "section_name")
+    private String sectionName;
 
-    @Column(name = "age")
-    private Integer age;
-
-    @Column(name = "gender")
-    private Integer gender;
-
-    @Column(name = "grade")
-    private String grade;
-
-    @Column(name = "class")
-    private Integer classNo;
-
-    @Column(name = "profile_photo")
-    private String profilePhoto;
-
-    @Column(name = "personal_signature")
-    private String personalSignature;
-
-    @Column(name = "openid")
-    private String openid;
-
-    @Column(name = "session_key")
-    private String sessionKey;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -60,9 +38,6 @@ public class User implements Serializable {
     @Column(name = "delete_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp deleteTime;
-
-    @Column(name = "delete_user_id")
-    private Long deleteUserId;
 
     @Column(name = "use_flag")
     private Integer useFlag;

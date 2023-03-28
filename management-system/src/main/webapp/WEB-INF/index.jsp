@@ -43,7 +43,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="/user/getUserListPage"
+                               data-url="<%=request.getContextPath()%>/user/getUserListPage"
                                class="site-demo-active">用户管理</a>
                         </dd>
                     </dl>
@@ -58,7 +58,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/teacher"
+                               data-url="<%=request.getContextPath()%>/section/getSectionListPage"
                                class="site-demo-active">板块管理</a>
                         </dd>
                         <dd>

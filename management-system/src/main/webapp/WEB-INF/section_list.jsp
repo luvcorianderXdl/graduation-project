@@ -19,22 +19,17 @@
         var table = layui.table;
         table.render({
             elem: '#test'
-            , url: '${pageContext.request.contextPath}/user/selectByPage'
+            , url: '${pageContext.request.contextPath}/section/selectByPage'
             , toolbar: '#toolbarDemo'
             // , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'id', title: 'ID', sort: true, width: 80}
-                , {field: 'name', title: '用户名', width: 150}
-                , {field: 'age', title: '年龄'}
-                , {field: 'gender', title: '性别'}
-                , {field: 'grade', title: '年级'}
-                , {field: 'classNo', title: '班级'}
-                , {field: 'openid', title: '唯一标识'}
+                , {field: 'sectionName', title: '板块名称'}
+                , {field: 'description', title: '描述'}
                 , {field: 'createTime', title: '创建时间', width: 170}
                 , {field: 'modifyTime', title: '修改时间', width: 170}
                 , {field: 'deleteTime', title: '删除时间', width: 170}
-                , {field: 'deleteUserId', title: '删除人', width: 80}
                 , {
                     field: 'useFlag', title: '状态', templet: function (d) {
                         return d.useFlag === 1 ? '正常' : '已删除';
@@ -53,7 +48,7 @@
             if (obj.event === 'del') {
                 layer.confirm('请确认删除', function (index) {
                     $.post(
-                        '${pageContext.request.contextPath}/user/deleteByIds?ids=' + ids,
+                        '${pageContext.request.contextPath}/section/deleteByIds?ids=' + ids,
                         // {'id': data.id},
                         function (jsonObj) {
                             console.log(jsonObj);
@@ -83,7 +78,7 @@
                     });
                     layer.confirm('请确认删除', function (index) {
                         $.post(
-                            '${pageContext.request.contextPath}/user/deleteByIds?ids=' + ids,
+                            '${pageContext.request.contextPath}/section/deleteByIds?ids=' + ids,
                             // {'ids': ids},
                             function (jsonObj) {
                                 console.log(jsonObj);

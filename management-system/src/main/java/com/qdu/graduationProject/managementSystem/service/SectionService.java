@@ -3,8 +3,8 @@ package com.qdu.graduationProject.managementSystem.service;
 import com.qdu.graduationProject.commonUtils.utils.DateUtil;
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
-import com.qdu.graduationProject.managementSystem.entity.User;
-import com.qdu.graduationProject.managementSystem.repository.UserRepository;
+import com.qdu.graduationProject.managementSystem.entity.Section;
+import com.qdu.graduationProject.managementSystem.repository.SectionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,32 +19,32 @@ import java.util.List;
 
 /**
  * @author xdl
- * @date 2023/3/28 15:37
+ * @date 2023/3/28 17:39
  */
 @Service
 @Transactional
-public class UserService {
+public class SectionService {
 
     @Resource
-    private UserRepository userRepository;
+    private SectionRepository sectionRepository;
 
     public LayUITableJSONResult getByPage(Integer pageNo, Integer pageSize) throws Exception {
         Integer offset = (pageNo - 1) * pageSize;
-        Integer totalCount = userRepository.getTotalCount();
+        Integer totalCount = sectionRepository.getTotalCount();
         if (totalCount < offset) {
             throw new Exception("请求参数错误");
         }
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        Page<User> list = userRepository.findAll(pageable);
+        Page<Section> list = sectionRepository.findAll(pageable);
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 
-    public JSONResult deleteById(List<Long> idList, Long id) {
+    public JSONResult deleteById(List<Long> idList) {
         //只调整没有删除的数据
         List<Long> ids = new ArrayList<>();
         idList.forEach(r -> {
-            if (userRepository.getUseFlagById(r) == 1) {
+            if (sectionRepository.getUseFlagById(r) == 1) {
                 ids.add(r);
             }
         });
@@ -52,7 +52,7 @@ public class UserService {
             return JSONResult.ok("已删除");
         }
         Timestamp deleteTime = DateUtil.getCurrentTimestamp();
-        userRepository.deleteByIds(ids, id, deleteTime);
+        sectionRepository.deleteByIds(ids, deleteTime);
         return JSONResult.ok("已删除");
     }
 }
