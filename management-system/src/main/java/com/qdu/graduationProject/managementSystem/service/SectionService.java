@@ -40,7 +40,7 @@ public class SectionService {
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 
-    public JSONResult deleteById(List<Long> idList) {
+    public JSONResult deleteById(List<Long> idList, Long id) {
         //只调整没有删除的数据
         List<Long> ids = new ArrayList<>();
         idList.forEach(r -> {
@@ -51,8 +51,8 @@ public class SectionService {
         if (ids.isEmpty()) {
             return JSONResult.ok("已删除");
         }
-        Timestamp deleteTime = DateUtil.getCurrentTimestamp();
-        sectionRepository.deleteByIds(ids, deleteTime);
+        Timestamp modifyTime = DateUtil.getCurrentTimestamp();
+        sectionRepository.deleteByIds(ids, modifyTime, id);
         return JSONResult.ok("已删除");
     }
 }

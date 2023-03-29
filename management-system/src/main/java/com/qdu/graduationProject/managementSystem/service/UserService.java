@@ -51,8 +51,8 @@ public class UserService {
         if (ids.isEmpty()) {
             return JSONResult.ok("已删除");
         }
-        Timestamp deleteTime = DateUtil.getCurrentTimestamp();
-        userRepository.deleteByIds(ids, id, deleteTime);
+        Timestamp modifyTime = DateUtil.getCurrentTimestamp();
+        userRepository.deleteByIds(ids, id, modifyTime);
         return JSONResult.ok("已删除");
     }
 }

@@ -28,11 +28,11 @@ public class AdminUser implements Serializable {
     @Column(name = "login_id")
     private String loginId;
 
-    @Transient
-    private String password;
-
-    @Transient
-    private String salt;
+//    @Transient
+//    private String password;
+//
+//    @Transient
+//    private String salt;
 
     @Column(name = "tels")
     private String tels;
@@ -50,10 +50,6 @@ public class AdminUser implements Serializable {
     @Column(name = "modify_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp modifyTime;
-
-    @Column(name = "deleteTime")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Timestamp deleteTime;
 
     @Column(name = "use_flag")
     private Integer useFlag;

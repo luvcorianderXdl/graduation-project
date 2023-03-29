@@ -34,7 +34,6 @@
                 , {field: 'description', title: '账号描述'}
                 , {field: 'createTime', title: '创建时间', width: 170}
                 , {field: 'modifyTime', title: '修改时间', width: 170}
-                , {field: 'deleteTime', title: '删除时间', width: 170}
                 , {
                     field: 'useFlag', title: '状态', templet: function (d) {
                         return d.useFlag === 1 ? '正常' : '已删除';

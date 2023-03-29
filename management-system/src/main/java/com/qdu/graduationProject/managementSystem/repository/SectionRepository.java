@@ -23,6 +23,6 @@ public interface SectionRepository extends JpaRepository<Section, Long> {
     Integer getUseFlagById(@Param("id") Long id);
 
     @Modifying
-    @Query(value = "update s_section set delete_time = :deleteTime,use_flag = 0 where id in (:ids)", nativeQuery = true)
-    void deleteByIds(@Param("ids") List<Long> ids, @Param("deleteTime") Timestamp deleteTime);
+    @Query(value = "update s_section set modify_time = :modifyTime,use_flag = 0,modify_user_id = :modifyUserId where id in (:ids)", nativeQuery = true)
+    void deleteByIds(@Param("ids") List<Long> ids, @Param("modifyTime") Timestamp modifyTime, @Param("modifyUserId") Long modifyUserId);
 }

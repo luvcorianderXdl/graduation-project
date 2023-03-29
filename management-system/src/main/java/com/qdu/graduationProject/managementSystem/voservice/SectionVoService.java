@@ -33,7 +33,7 @@ public class SectionVoService {
         return sectionService.getByPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
     }
 
-    public JSONResult deleteByIds(String ids) {
+    public JSONResult deleteByIds(String ids, Long id) {
         if (ids == null || "".equals(ids)) {
             return JSONResult.error("请选择板块");
         }
@@ -42,6 +42,6 @@ public class SectionVoService {
         for (String s : temp) {
             idList.add(Long.parseLong(s));
         }
-        return sectionService.deleteById(idList);
+        return sectionService.deleteById(idList, id);
     }
 }

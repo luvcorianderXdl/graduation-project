@@ -2,6 +2,7 @@ package com.qdu.graduationProject.managementSystem.controller;
 
 import com.qdu.graduationProject.commonUtils.utils.JSONUtil;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
+import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.voservice.SectionVoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author xdl
@@ -39,7 +41,9 @@ public class SectionController {
 
     @RequestMapping("/deleteByIds")
     @ResponseBody
-    public Object deleteByIds(String ids) {
-        return sectionVoService.deleteByIds(ids);
+    public Object deleteByIds(HttpServletRequest req, String ids) {
+        HttpSession session = req.getSession();
+        AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
+        return sectionVoService.deleteByIds(ids, adminUser.getId());
     }
 }

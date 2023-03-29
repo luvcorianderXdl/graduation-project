@@ -57,10 +57,6 @@ public class User implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp modifyTime;
 
-    @Column(name = "delete_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Timestamp deleteTime;
-
     @Column(name = "delete_user_id")
     private Long deleteUserId;
 

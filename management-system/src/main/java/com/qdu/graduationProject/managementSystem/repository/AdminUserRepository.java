@@ -41,8 +41,8 @@ public interface AdminUserRepository extends JpaRepository<AdminUser, Long> {
     void setSaltAndPassword(@Param("salt") String salt, @Param("password") String password, @Param("loginId") String loginId);
 
     @Modifying
-    @Query(value = "update admin_user set delete_time = :deleteTime,use_flag = 0 where id in (:ids)", nativeQuery = true)
-    void deleteByIds(@Param("ids") List<Long> ids, @Param("deleteTime") Timestamp deleteTime);
+    @Query(value = "update admin_user set modify_time = :modifyTime,use_flag = 0 where id in (:ids)", nativeQuery = true)
+    void deleteByIds(@Param("ids") List<Long> ids, @Param("modifyTime") Timestamp modifyTime);
 
     @Query(value = "select use_flag from admin_user where id = :id", nativeQuery = true)
     Integer getUseFlagById(@Param("id") Long id);

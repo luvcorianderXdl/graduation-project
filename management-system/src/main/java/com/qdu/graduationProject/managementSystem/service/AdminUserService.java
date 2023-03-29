@@ -87,7 +87,6 @@ public class AdminUserService {
         Timestamp addTime = DateUtil.getCurrentTimestamp();
         adminUser.setCreateTime(addTime);
         adminUser.setModifyTime(null);
-        adminUser.setDeleteTime(null);
         adminUser.setUseFlag(1);
         adminUserRepository.save(adminUser);
         String salt = RandomStringUtil.randomString(10);
@@ -110,8 +109,8 @@ public class AdminUserService {
         if (ids.contains(id)) {
             return JSONResult.error("禁止删除本人");
         }
-        Timestamp deleteTime = DateUtil.getCurrentTimestamp();
-        adminUserRepository.deleteByIds(ids, deleteTime);
+        Timestamp modifyTime = DateUtil.getCurrentTimestamp();
+        adminUserRepository.deleteByIds(ids, modifyTime);
         return JSONResult.ok("已删除");
     }
 

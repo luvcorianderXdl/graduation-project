@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Integer getUseFlagById(@Param("id") Long id);
 
     @Modifying
-    @Query(value = "update u_user set delete_time = :deleteTime,delete_user_id = :deleteUserId,use_flag = 0 where id in (:ids)", nativeQuery = true)
-    void deleteByIds(@Param("ids") List<Long> ids, @Param("deleteUserId") Long deleteUserId, @Param("deleteTime") Timestamp deleteTime);
+    @Query(value = "update u_user set modify_time = :modifyTime,delete_user_id = :deleteUserId,use_flag = 0 where id in (:ids)", nativeQuery = true)
+    void deleteByIds(@Param("ids") List<Long> ids, @Param("deleteUserId") Long deleteUserId, @Param("modifyTime") Timestamp deleteTime);
 
 }
