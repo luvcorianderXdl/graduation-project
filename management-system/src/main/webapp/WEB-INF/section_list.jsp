@@ -11,6 +11,7 @@
 </script>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
         <button class="layui-btn layui-btn-sm" lay-event="deleteAll">批量删除</button>
     </div>
 </script>
@@ -27,6 +28,13 @@
                 , {field: 'id', title: 'ID', sort: true, width: 80}
                 , {field: 'sectionName', title: '板块名称'}
                 , {field: 'description', title: '描述'}
+                , {
+                    field: 'sectionImage',
+                    title: '图像',
+                    templet: function (d) {
+                        return '<img src="' + d.sectionImage + '">';
+                    }
+                }
                 , {field: 'createTime', title: '创建时间', width: 170}
                 , {field: 'modifyTime', title: '修改时间', width: 170}
                 , {field: 'modifyUserId', title: '修改人', width: 170}
@@ -70,6 +78,15 @@
         table.on('toolbar(layFilter)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        title: "添加管理员",
+                        area: ['430px', '500px'],
+                        content: '${pageContext.request.contextPath}/section/getAddPage'
+                    });
+
+                    break;
                 case 'deleteAll':
                     var data = checkStatus.data;
                     var ids = [];

@@ -3,6 +3,7 @@ package com.qdu.graduationProject.managementSystem.voservice;
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.managementSystem.service.SectionService;
+import com.qdu.graduationProject.managementSystem.vo.AddSectionVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -43,5 +44,18 @@ public class SectionVoService {
             idList.add(Long.parseLong(s));
         }
         return sectionService.deleteById(idList, id);
+    }
+
+    public JSONResult addSection(AddSectionVo vo, Long id) {
+        if (vo.getSectionName() == null || "".equals(vo.getSectionName())) {
+            return JSONResult.error("板块名禁止为空");
+        }
+        if (vo.getDescription() == null || "".equals(vo.getDescription())) {
+            return JSONResult.error("板块介绍禁止为空");
+        }
+        if (vo.getSectionImage() == null || "".equals(vo.getSectionImage())) {
+            return JSONResult.error("请上传图片");
+        }
+        return sectionService.addSection(vo, id);
     }
 }

@@ -1,8 +1,10 @@
 package com.qdu.graduationProject.managementSystem.controller;
 
+import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.JSONUtil;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
+import com.qdu.graduationProject.managementSystem.vo.AddSectionVo;
 import com.qdu.graduationProject.managementSystem.voservice.SectionVoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,13 @@ public class SectionController {
     private SectionVoService sectionVoService;
 
     @RequestMapping("/getSectionListPage")
-    public String getAdminUserListPage() {
+    public String getSectionListPage() {
         return "section_list";
+    }
+
+    @RequestMapping("/getAddPage")
+    public String getSectionAddPage() {
+        return "section_add";
     }
 
     @RequestMapping("/selectByPage")
@@ -46,4 +53,13 @@ public class SectionController {
         AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
         return sectionVoService.deleteByIds(ids, adminUser.getId());
     }
+
+    @RequestMapping("/addSection")
+    @ResponseBody
+    public JSONResult addSection(HttpServletRequest req, AddSectionVo vo) {
+        HttpSession session = req.getSession();
+        AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
+        return sectionVoService.addSection(vo, adminUser.getId());
+    }
+
 }

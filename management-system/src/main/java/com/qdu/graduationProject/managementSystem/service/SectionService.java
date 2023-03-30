@@ -3,8 +3,10 @@ package com.qdu.graduationProject.managementSystem.service;
 import com.qdu.graduationProject.commonUtils.utils.DateUtil;
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
+import com.qdu.graduationProject.commonUtils.utils.UrlPrefixUtil;
 import com.qdu.graduationProject.managementSystem.entity.Section;
 import com.qdu.graduationProject.managementSystem.repository.SectionRepository;
+import com.qdu.graduationProject.managementSystem.vo.AddSectionVo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +39,9 @@ public class SectionService {
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         Page<Section> list = sectionRepository.findAll(pageable);
+        list.forEach(r -> {
+            r.setSectionImage(UrlPrefixUtil.getFullSectionPrefix() + r.getSectionImage());
+        });
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 
@@ -54,5 +59,19 @@ public class SectionService {
         Timestamp modifyTime = DateUtil.getCurrentTimestamp();
         sectionRepository.deleteByIds(ids, modifyTime, id);
         return JSONResult.ok("已删除");
+    }
+
+    public JSONResult addSection(AddSectionVo vo, Long id) {
+        Section section = new Section();
+        section.setSectionName(vo.getSectionName());
+        section.setDescription(vo.getDescription());
+        section.setSectionImage(vo.getSectionImage());
+        Timestamp createTime = DateUtil.getCurrentTimestamp();
+        section.setCreateTime(createTime);
+        section.setModifyUserId(id);
+        section.setModifyTime(null);
+        section.setUseFlag(1);
+        sectionRepository.save(section);
+        return JSONResult.ok("板块添加完毕");
     }
 }

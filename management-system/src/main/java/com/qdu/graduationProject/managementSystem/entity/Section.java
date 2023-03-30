@@ -27,6 +27,9 @@ public class Section {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "section_image")
+    private String sectionImage;
+
     @Column(name = "create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp createTime;
