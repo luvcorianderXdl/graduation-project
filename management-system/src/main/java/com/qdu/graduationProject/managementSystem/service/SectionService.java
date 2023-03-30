@@ -3,7 +3,6 @@ package com.qdu.graduationProject.managementSystem.service;
 import com.qdu.graduationProject.commonUtils.utils.DateUtil;
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
-import com.qdu.graduationProject.commonUtils.utils.UrlPrefixUtil;
 import com.qdu.graduationProject.managementSystem.entity.Section;
 import com.qdu.graduationProject.managementSystem.repository.SectionRepository;
 import com.qdu.graduationProject.managementSystem.vo.AddSectionVo;
@@ -39,9 +38,6 @@ public class SectionService {
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         Page<Section> list = sectionRepository.findAll(pageable);
-        list.forEach(r -> {
-            r.setSectionImage(UrlPrefixUtil.getFullSectionPrefix() + r.getSectionImage());
-        });
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 

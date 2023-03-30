@@ -2,6 +2,8 @@ package com.qdu.graduationProject.managementSystem.voservice;
 
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
+import com.qdu.graduationProject.commonUtils.utils.UrlPrefixUtil;
+import com.qdu.graduationProject.managementSystem.entity.Section;
 import com.qdu.graduationProject.managementSystem.service.SectionService;
 import com.qdu.graduationProject.managementSystem.vo.AddSectionVo;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,11 @@ public class SectionVoService {
         if (pageSize == null || pageSize.equals("")) {
             pageSize = "10";
         }
-        return sectionService.getByPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
+        LayUITableJSONResult layUITableJSONResult = sectionService.getByPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
+        ((List<Section>) layUITableJSONResult.getData()).forEach(r -> {
+            r.setSectionImage(UrlPrefixUtil.getFullSectionPrefix() + r.getSectionImage());
+        });
+        return layUITableJSONResult;
     }
 
     public JSONResult deleteByIds(String ids, Long id) {
