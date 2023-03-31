@@ -1,6 +1,8 @@
 package com.qdu.graduationProject.managementSystem.repository;
 
 import com.qdu.graduationProject.managementSystem.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +29,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "update u_user set modify_time = :modifyTime,delete_user_id = :deleteUserId,use_flag = 0 where id in (:ids)", nativeQuery = true)
     void deleteByIds(@Param("ids") List<Long> ids, @Param("deleteUserId") Long deleteUserId, @Param("modifyTime") Timestamp deleteTime);
 
+    Page<User> findAllByOrderByUseFlagDesc(Pageable pageable);
 }

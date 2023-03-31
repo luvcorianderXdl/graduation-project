@@ -1,6 +1,8 @@
 package com.qdu.graduationProject.managementSystem.repository;
 
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -50,4 +52,6 @@ public interface AdminUserRepository extends JpaRepository<AdminUser, Long> {
     @Modifying
     @Query(value = "update admin_user set name = :name,tels = :tels,emails = :emails,description = :description,modify_time = :modifyTime where id = :id", nativeQuery = true)
     void updateAdminUser(@Param("id") Long id, @Param("name") String name, @Param("tels") String tels, @Param("emails") String emails, @Param("description") String description, @Param("modifyTime") Timestamp modifyTime);
+
+    Page<AdminUser> findAllByOrderByUseFlagDesc(Pageable pageable);
 }

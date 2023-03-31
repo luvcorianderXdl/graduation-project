@@ -4,6 +4,12 @@
     <title>用户管理</title>
     <%@ include file="header.jsp" %>
 </head>
+<style>
+    .layui-table-cell {
+        height: auto;
+        line-height: 30px;
+    }
+</style>
 <body>
 <table class="layui-hide" id="test" lay-filter="layFilter"></table>
 <script type="text/html" id="barDemo">

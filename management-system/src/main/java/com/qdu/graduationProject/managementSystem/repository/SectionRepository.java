@@ -1,6 +1,8 @@
 package com.qdu.graduationProject.managementSystem.repository;
 
 import com.qdu.graduationProject.managementSystem.entity.Section;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,4 +27,6 @@ public interface SectionRepository extends JpaRepository<Section, Long> {
     @Modifying
     @Query(value = "update s_section set modify_time = :modifyTime,use_flag = 0,modify_user_id = :modifyUserId where id in (:ids)", nativeQuery = true)
     void deleteByIds(@Param("ids") List<Long> ids, @Param("modifyTime") Timestamp modifyTime, @Param("modifyUserId") Long modifyUserId);
+
+    Page<Section> findAllByOrderByUseFlagDesc(Pageable pageable);
 }

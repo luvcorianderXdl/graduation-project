@@ -36,7 +36,7 @@ public class UserService {
         }
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        Page<User> list = userRepository.findAll(pageable);
+        Page<User> list = userRepository.findAllByOrderByUseFlagDesc(pageable);
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 

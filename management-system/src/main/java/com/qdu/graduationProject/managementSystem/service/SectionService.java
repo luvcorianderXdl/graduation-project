@@ -37,7 +37,7 @@ public class SectionService {
         }
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        Page<Section> list = sectionRepository.findAll(pageable);
+        Page<Section> list = sectionRepository.findAllByOrderByUseFlagDesc(pageable);
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 

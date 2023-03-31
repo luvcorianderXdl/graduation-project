@@ -66,7 +66,7 @@ public class AdminUserService {
         }
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        Page<AdminUser> list = adminUserRepository.findAll(pageable);
+        Page<AdminUser> list = adminUserRepository.findAllByOrderByUseFlagDesc(pageable);
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 
