@@ -88,6 +88,8 @@ public class SectionVoService {
         if (vo.getSectionImage() == null || "".equals(vo.getSectionImage())) {
             return JSONResult.error("请上传图片");
         }
+        String[] temp = vo.getSectionImage().split("/");
+        vo.setSectionImage(temp[temp.length - 1]);
         return sectionService.updateSection(vo, id);
     }
 }

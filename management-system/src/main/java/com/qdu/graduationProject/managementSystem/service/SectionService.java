@@ -77,7 +77,7 @@ public class SectionService {
     }
 
     public JSONResult updateSection(UpdateSectionVo vo, Long id) {
-        sectionRepository.updateSection(vo.getId(), vo.getSectionName(), vo.getDescription(), vo.getSectionImage(), id);
+        sectionRepository.updateSection(vo.getId(), vo.getSectionName(), vo.getDescription(), vo.getSectionImage(), DateUtil.getCurrentTimestamp(), id);
         return JSONResult.ok("修改成功");
     }
 }

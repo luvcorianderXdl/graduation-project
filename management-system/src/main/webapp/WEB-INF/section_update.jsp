@@ -28,7 +28,7 @@
             <div class="layui-upload">
                 <div class="layui-upload-list">
                     <img class="layui-upload-img" src="${section.sectionImage}" id="demo1" width="150px" height="150px">
-                    <input type="hidden" name="sectionImage" id="sectionImage"/>
+                    <input type="hidden" name="sectionImage" id="sectionImage" value="${section.sectionImage}"/>
                     <p id="demoText"></p>
                 </div>
                 <button type="button" class="layui-btn" id="test1">上传图片</button>
