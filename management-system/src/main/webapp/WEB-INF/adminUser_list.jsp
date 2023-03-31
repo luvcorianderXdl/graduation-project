@@ -8,6 +8,7 @@
 <table class="layui-hide" id="test" lay-filter="layFilter"></table>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="permission">权限</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="toolbarDemo">
@@ -26,7 +27,7 @@
             // , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'ID', sort: true, width: 80}
+                , {field: 'id', title: 'ID', sort: true, width: 50}
                 , {field: 'name', title: '用户名', width: 150}
                 , {field: 'loginId', title: '登录ID'}
                 , {field: 'tels', title: '手机号'}
@@ -37,9 +38,9 @@
                 , {
                     field: 'useFlag', title: '状态', templet: function (d) {
                         return d.useFlag === 1 ? '正常' : '已删除';
-                    }, width: 80
+                    }, width: 75
                 }
-                , {title: '操作', toolbar: '#barDemo', width: 120}
+                , {title: '操作', toolbar: '#barDemo', width: 180}
             ]]
             , page: true
             , id: 'tableId'
@@ -76,6 +77,7 @@
                     content: '${pageContext.request.contextPath}/adminUser/getUpdatePage?id=' + data.id
                 });
             }
+            //此处修改权限
         });
 
         table.on('toolbar(layFilter)', function (obj) {

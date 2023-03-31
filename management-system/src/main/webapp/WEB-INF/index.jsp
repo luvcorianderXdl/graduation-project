@@ -38,11 +38,6 @@
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/adminUser/getAdminUserListPage"
-                               class="site-demo-active">管理员管理</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;"
                                data-url="<%=request.getContextPath()%>/user/getUserListPage"
                                class="site-demo-active">用户管理</a>
                         </dd>
@@ -69,6 +64,21 @@
                         <a href="javascript:;"
                            data-url="<%=request.getContextPath()%>/teacher"
                            class="site-demo-active">评论管理</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">系统设置</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;"
+                               data-url="<%=request.getContextPath()%>/adminUser/getAdminUserListPage"
+                               class="site-demo-active">管理员管理</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;"
+                               data-url="<%=request.getContextPath()%>/"
+                               class="site-demo-active">权限管理</a>
                         </dd>
                     </dl>
                 </li>
