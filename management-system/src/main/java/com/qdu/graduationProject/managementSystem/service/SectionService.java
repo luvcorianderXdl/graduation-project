@@ -6,6 +6,7 @@ import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.managementSystem.entity.Section;
 import com.qdu.graduationProject.managementSystem.repository.SectionRepository;
 import com.qdu.graduationProject.managementSystem.vo.AddSectionVo;
+import com.qdu.graduationProject.managementSystem.vo.UpdateSectionVo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -69,5 +70,14 @@ public class SectionService {
         section.setUseFlag(1);
         sectionRepository.save(section);
         return JSONResult.ok("板块添加完毕");
+    }
+
+    public Section getSectionById(Long id) {
+        return sectionRepository.getSectionById(id);
+    }
+
+    public JSONResult updateSection(UpdateSectionVo vo, Long id) {
+        sectionRepository.updateSection(vo.getId(), vo.getSectionName(), vo.getDescription(), vo.getSectionImage(), id);
+        return JSONResult.ok("修改成功");
     }
 }

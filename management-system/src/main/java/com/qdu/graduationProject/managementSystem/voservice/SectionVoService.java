@@ -6,6 +6,7 @@ import com.qdu.graduationProject.commonUtils.utils.UrlPrefixUtil;
 import com.qdu.graduationProject.managementSystem.entity.Section;
 import com.qdu.graduationProject.managementSystem.service.SectionService;
 import com.qdu.graduationProject.managementSystem.vo.AddSectionVo;
+import com.qdu.graduationProject.managementSystem.vo.UpdateSectionVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,5 +64,30 @@ public class SectionVoService {
             return JSONResult.error("请上传图片");
         }
         return sectionService.addSection(vo, id);
+    }
+
+    public Section getSectionById(Long id) {
+        if (id != null) {
+            Section section = sectionService.getSectionById(id);
+            section.setSectionImage(UrlPrefixUtil.getFullSectionPrefix() + section.getSectionImage());
+            return section;
+        }
+        return null;
+    }
+
+    public JSONResult updateSection(UpdateSectionVo vo, Long id) throws Exception {
+        if (vo.getId() == null) {
+            throw new Exception("参数缺失");
+        }
+        if (vo.getSectionName() == null || "".equals(vo.getSectionName())) {
+            return JSONResult.error("板块名禁止为空");
+        }
+        if (vo.getDescription() == null || "".equals(vo.getDescription())) {
+            return JSONResult.error("板块介绍禁止为空");
+        }
+        if (vo.getSectionImage() == null || "".equals(vo.getSectionImage())) {
+            return JSONResult.error("请上传图片");
+        }
+        return sectionService.updateSection(vo, id);
     }
 }

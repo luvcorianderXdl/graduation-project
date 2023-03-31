@@ -105,9 +105,9 @@ public class AdminUserVoService {
         return adminUserService.deleteById(idList, id);
     }
 
-    public AdminUser getAdminUserById(String id) {
-        if (id != null && !"".equals(id)) {
-            return adminUserService.getAdminUserById(Long.parseLong(id));
+    public AdminUser getAdminUserById(Long id) {
+        if (id != null) {
+            return adminUserService.getAdminUserById(id);
         }
         return null;
     }

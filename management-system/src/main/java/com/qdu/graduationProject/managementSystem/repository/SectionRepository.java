@@ -29,4 +29,10 @@ public interface SectionRepository extends JpaRepository<Section, Long> {
     void deleteByIds(@Param("ids") List<Long> ids, @Param("modifyTime") Timestamp modifyTime, @Param("modifyUserId") Long modifyUserId);
 
     Page<Section> findAllByOrderByUseFlagDesc(Pageable pageable);
+
+    Section getSectionById(Long id);
+
+    @Modifying
+    @Query(value = "update s_section set section_name = :sectionName,description =:description,section_image = :sectionImage,modify_user_id =:modifyUserId where id = :id", nativeQuery = true)
+    void updateSection(@Param("id") Long id, @Param("sectionName") String sectionName, @Param("description") String description, @Param("sectionImage") String sectionImage, @Param("modifyUserId") Long modifyUserId);
 }
