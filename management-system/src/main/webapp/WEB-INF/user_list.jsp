@@ -27,7 +27,17 @@
                 , {field: 'id', title: 'ID', sort: true, width: 80}
                 , {field: 'name', title: '用户名', width: 150}
                 , {field: 'age', title: '年龄'}
-                , {field: 'gender', title: '性别'}
+                , {
+                    field: 'gender', title: '性别', templet: function (d) {
+                        if (d.gender == 1) {
+                            return '男';
+                        } else if (d.gender == 0) {
+                            return '女';
+                        } else {
+                            return '不愿透露';
+                        }
+                    }
+                }
                 , {field: 'grade', title: '年级'}
                 , {field: 'classNo', title: '班级'}
                 , {field: 'openid', title: '唯一标识'}
