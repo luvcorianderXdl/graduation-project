@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author xdl
@@ -56,5 +57,9 @@ public class RoleService {
         role.setModifyUserId(id);
         roleRepository.save(role);
         return JSONResult.ok("添加成功");
+    }
+
+    public List<Role> getAll() {
+        return roleRepository.findAll();
     }
 }

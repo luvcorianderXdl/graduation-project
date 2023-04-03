@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @author xdl
@@ -20,6 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 public class RoleVoService {
     @Resource
     private RoleService roleService;
+
+    public List<Role> getAll() {
+        return roleService.getAll();
+    }
 
     public LayUITableJSONResult getByPage(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String pageNo = req.getParameter("page");

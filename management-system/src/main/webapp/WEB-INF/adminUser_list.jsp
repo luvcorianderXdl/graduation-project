@@ -76,8 +76,14 @@
                     area: ['550px', '350px'],
                     content: '${pageContext.request.contextPath}/adminUser/getUpdatePage?id=' + data.id
                 });
+            } else if (obj.event === 'permission') {
+                layer.open({
+                    type: 2,
+                    title: "修改管理员权限",
+                    area: ['430px', '500px'],
+                    content: '${pageContext.request.contextPath}/adminUserToRole/getUpdatePage?id=' + data.id
+                });
             }
-            //此处修改权限
         });
 
         table.on('toolbar(layFilter)', function (obj) {
@@ -116,15 +122,6 @@
                             'json'
                         );
                     });
-                    break;
-                case 'permission':
-                    layer.open({
-                        type: 2,
-                        title: "修改管理员权限",
-                        area: ['430px', '500px'],
-                        content: '${pageContext.request.contextPath}/admToRole/updatePermission'
-                    });
-
                     break;
                 case 'LAYTABLE_TIPS':
                     layer.alert('这是工具栏右侧自定义的一个图标按钮');
