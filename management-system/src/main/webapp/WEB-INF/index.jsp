@@ -77,8 +77,8 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/"
-                               class="site-demo-active">权限管理</a>
+                               data-url="<%=request.getContextPath()%>/role/getRoleListPage"
+                               class="site-demo-active">权限角色管理</a>
                         </dd>
                     </dl>
                 </li>

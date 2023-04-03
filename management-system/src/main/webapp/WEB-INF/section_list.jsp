@@ -80,7 +80,8 @@
                 layer.open({
                     type: 2,
                     title: "编辑板块",
-                    area: ['430px', '500px'],
+                    area: ['430px', '470px'],
+                    offset: [80, 400],
                     content: '${pageContext.request.contextPath}/section/getUpdatePage?id=' + data.id
                 });
             }
@@ -93,7 +94,8 @@
                     layer.open({
                         type: 2,
                         title: "添加板块",
-                        area: ['430px', '500px'],
+                        area: ['430px', '470px'],
+                        offset: [80, 400],
                         content: '${pageContext.request.contextPath}/section/getAddPage'
                     });
                     break;

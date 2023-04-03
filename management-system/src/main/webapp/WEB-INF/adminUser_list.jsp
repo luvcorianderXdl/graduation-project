@@ -8,7 +8,7 @@
 <table class="layui-hide" id="test" lay-filter="layFilter"></table>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-xs" lay-event="permission">权限</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="permission">权限</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="toolbarDemo">
@@ -116,6 +116,15 @@
                             'json'
                         );
                     });
+                    break;
+                case 'permission':
+                    layer.open({
+                        type: 2,
+                        title: "修改管理员权限",
+                        area: ['430px', '500px'],
+                        content: '${pageContext.request.contextPath}/admToRole/updatePermission'
+                    });
+
                     break;
                 case 'LAYTABLE_TIPS':
                     layer.alert('这是工具栏右侧自定义的一个图标按钮');
