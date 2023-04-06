@@ -80,7 +80,7 @@
                 layer.open({
                     type: 2,
                     title: "修改管理员权限",
-                    area: ['430px', '500px'],
+                    area: ['360px', '310px'],
                     content: '${pageContext.request.contextPath}/adminUserToRole/getUpdatePage?id=' + data.id
                 });
             }

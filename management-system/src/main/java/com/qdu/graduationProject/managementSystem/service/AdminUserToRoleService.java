@@ -1,5 +1,7 @@
 package com.qdu.graduationProject.managementSystem.service;
 
+import com.qdu.graduationProject.commonUtils.utils.JSONResult;
+import com.qdu.graduationProject.managementSystem.entity.AdminUserToRole;
 import com.qdu.graduationProject.managementSystem.repository.AdminUserToRoleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,5 +22,20 @@ public class AdminUserToRoleService {
 
     public List<Long> getRoleIdsByAdminUserId(Long id) {
         return adminUserToRoleRepository.getRoleIdsByAdminUserId(id);
+    }
+
+    public JSONResult updateAdminUserToRole(List<Long> roles, Long adminUserId) {
+        //根据id删除
+        adminUserToRoleRepository.deleteAdminUserToRolesByAdminUserId(adminUserId);
+        //重新添加
+        if (roles != null && !roles.isEmpty()) {
+            roles.forEach(roleId -> {
+                AdminUserToRole temp = new AdminUserToRole();
+                temp.setRoleId(roleId);
+                temp.setAdminUserId(adminUserId);
+                adminUserToRoleRepository.save(temp);
+            });
+        }
+        return JSONResult.ok("权限修改完成");
     }
 }

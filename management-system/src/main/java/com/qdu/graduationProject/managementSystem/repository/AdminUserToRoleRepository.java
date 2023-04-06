@@ -17,4 +17,6 @@ public interface AdminUserToRoleRepository extends JpaRepository<AdminUserToRole
 
     @Query(value = "select role_id from admin_user_to_role where admin_user_id = :id", nativeQuery = true)
     List<Long> getRoleIdsByAdminUserId(@Param("id") Long id);
+    
+    void deleteAdminUserToRolesByAdminUserId(Long id);
 }

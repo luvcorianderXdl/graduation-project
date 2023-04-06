@@ -1,10 +1,11 @@
 package com.qdu.graduationProject.managementSystem.controller;
 
-import com.qdu.graduationProject.managementSystem.entity.Role;
+import com.qdu.graduationProject.managementSystem.vo.AdminUserToRoleTableInfoVo;
+import com.qdu.graduationProject.managementSystem.vo.UpdateAdminUserToRoleVo;
 import com.qdu.graduationProject.managementSystem.voservice.AdminUserToRoleVoService;
-import com.qdu.graduationProject.managementSystem.voservice.RoleVoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -20,18 +21,23 @@ public class AdminUserToRoleController {
 
     @Resource
     private AdminUserToRoleVoService adminUserToRoleVoService;
-    
-    @Resource
-    private RoleVoService roleVoService;
 
     @RequestMapping("/getUpdatePage")
     public ModelAndView getUpdatePage(Long id) {
-        List<Long> roleIds = adminUserToRoleVoService.getRoleIdsByAdminUserId(id);
-        List<Role> roles = roleVoService.getAll();
+        List<AdminUserToRoleTableInfoVo> vos = adminUserToRoleVoService.getPageInfo(id);
         ModelAndView modelAndView = new ModelAndView("adminUserToRole_update");
-        modelAndView.addObject("roleIds", roleIds);
-        modelAndView.addObject("roles", roles);
+        modelAndView.addObject("vos", vos);
         return modelAndView;
     }
 
+    @RequestMapping("/update")
+    @ResponseBody
+    public Object update(UpdateAdminUserToRoleVo vo) {
+        try {
+            return adminUserToRoleVoService.updateAdminUserToRole(vo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
 }

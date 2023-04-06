@@ -59,7 +59,7 @@ public class RoleService {
         return JSONResult.ok("添加成功");
     }
 
-    public List<Role> getAll() {
+    public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
 }
