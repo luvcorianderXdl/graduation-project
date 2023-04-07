@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -52,8 +53,9 @@ public class RoleService {
         Role role = new Role();
         role.setName(vo.getName());
         role.setDescription(vo.getDescription());
-        role.setCreateTime(DateUtil.getCurrentTimestamp());
-        role.setModifyTime(null);
+        Timestamp timestamp = DateUtil.getCurrentTimestamp();
+        role.setCreateTime(timestamp);
+        role.setModifyTime(timestamp);
         role.setModifyUserId(id);
         role.setUseFlag(1);
         roleRepository.save(role);
