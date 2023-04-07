@@ -29,7 +29,7 @@
             , url: '${pageContext.request.contextPath}/section/selectByPage'
             , toolbar: '#toolbarDemo'
             , cols: [[
-                , {field: 'id', title: 'ID', sort: true, width: 80}
+                , {field: 'id', title: 'ID', sort: true, width: 45}
                 , {field: 'sectionName', title: '板块名称'}
                 , {field: 'description', title: '描述'}
                 , {
