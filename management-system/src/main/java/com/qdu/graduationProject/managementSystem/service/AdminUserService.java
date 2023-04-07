@@ -70,7 +70,7 @@ public class AdminUserService {
         return LayUITableJSONResult.ok(totalCount, list.getContent());
     }
 
-    public JSONResult addAdminUser(AddAdminUserVo vo) {
+    public JSONResult addAdminUser(AddAdminUserVo vo, Long id) {
         List<String> loginIds = adminUserRepository.getSameLoginIds(vo.getLoginId());
         if (!loginIds.isEmpty()) {
             return JSONResult.error("登录id已存在");
@@ -86,7 +86,8 @@ public class AdminUserService {
         adminUser.setDescription(vo.getDescription());
         Timestamp addTime = DateUtil.getCurrentTimestamp();
         adminUser.setCreateTime(addTime);
-        adminUser.setModifyTime(null);
+        adminUser.setModifyTime(addTime);
+        adminUser.setModifyUserId(id);
         adminUser.setUseFlag(1);
         adminUserRepository.save(adminUser);
         String salt = RandomStringUtil.randomString(10);
@@ -110,7 +111,7 @@ public class AdminUserService {
             return JSONResult.error("禁止删除本人");
         }
         Timestamp modifyTime = DateUtil.getCurrentTimestamp();
-        adminUserRepository.deleteByIds(ids, modifyTime);
+        adminUserRepository.deleteByIds(ids, modifyTime, id);
         return JSONResult.ok("已删除");
     }
 
@@ -118,7 +119,7 @@ public class AdminUserService {
         return adminUserRepository.getAdminUserById(id);
     }
 
-    public JSONResult updateAdminUser(UpdateAdminUserVo vo) {
+    public JSONResult updateAdminUser(UpdateAdminUserVo vo, Long id) {
         AdminUser adminUser = adminUserRepository.getAdminUserById(vo.getId());
         if (adminUser.getUseFlag() == 0) {
             return JSONResult.error("已删除用户,禁止编辑");
@@ -126,7 +127,7 @@ public class AdminUserService {
         if (vo.getName().equals(adminUser.getName()) && vo.getEmails().equals(adminUser.getEmails()) && vo.getTels().equals(adminUser.getTels()) && vo.getDescription().equals(adminUser.getDescription())) {
             return JSONResult.ok("修改成功");
         }
-        adminUserRepository.updateAdminUser(vo.getId(), vo.getName(), vo.getTels(), vo.getEmails(), vo.getDescription(), DateUtil.getCurrentTimestamp());
+        adminUserRepository.updateAdminUser(vo.getId(), vo.getName(), vo.getTels(), vo.getEmails(), vo.getDescription(), DateUtil.getCurrentTimestamp(), id);
         return JSONResult.ok("修改成功");
     }
 }

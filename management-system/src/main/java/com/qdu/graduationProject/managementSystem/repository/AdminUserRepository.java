@@ -43,15 +43,15 @@ public interface AdminUserRepository extends JpaRepository<AdminUser, Long> {
     void setSaltAndPassword(@Param("salt") String salt, @Param("password") String password, @Param("loginId") String loginId);
 
     @Modifying
-    @Query(value = "update admin_user set modify_time = :modifyTime,use_flag = 0 where id in (:ids)", nativeQuery = true)
-    void deleteByIds(@Param("ids") List<Long> ids, @Param("modifyTime") Timestamp modifyTime);
+    @Query(value = "update admin_user set modify_time = :modifyTime,use_flag = 0,modify_user_id = :id where id in (:ids)", nativeQuery = true)
+    void deleteByIds(@Param("ids") List<Long> ids, @Param("modifyTime") Timestamp modifyTime, @Param("id") Long id);
 
     @Query(value = "select use_flag from admin_user where id = :id", nativeQuery = true)
     Integer getUseFlagById(@Param("id") Long id);
 
     @Modifying
-    @Query(value = "update admin_user set name = :name,tels = :tels,emails = :emails,description = :description,modify_time = :modifyTime where id = :id", nativeQuery = true)
-    void updateAdminUser(@Param("id") Long id, @Param("name") String name, @Param("tels") String tels, @Param("emails") String emails, @Param("description") String description, @Param("modifyTime") Timestamp modifyTime);
+    @Query(value = "update admin_user set name = :name,tels = :tels,emails = :emails,description = :description,modify_time = :modifyTime,modify_user_id = :modifyUserId where id = :id", nativeQuery = true)
+    void updateAdminUser(@Param("id") Long id, @Param("name") String name, @Param("tels") String tels, @Param("emails") String emails, @Param("description") String description, @Param("modifyTime") Timestamp modifyTime, @Param("modifyUserId") Long modifyUserId);
 
     Page<AdminUser> findAllByOrderByUseFlagDesc(Pageable pageable);
 }

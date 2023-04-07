@@ -40,6 +40,7 @@
                         return d.useFlag === 1 ? '正常' : '已删除';
                     }, width: 75
                 }
+                , {field: 'modifyUserId', title: '修改人', width: 80}
                 , {title: '操作', toolbar: '#barDemo', width: 180}
             ]]
             , page: true

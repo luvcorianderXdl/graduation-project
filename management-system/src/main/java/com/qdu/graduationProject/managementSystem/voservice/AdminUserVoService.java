@@ -68,7 +68,7 @@ public class AdminUserVoService {
         }
     }
 
-    public JSONResult addAdminUser(AddAdminUserVo vo) {
+    public JSONResult addAdminUser(AddAdminUserVo vo, Long id) {
         if (vo.getName() == null || "".equals(vo.getName())) {
             return JSONResult.error("用户名禁止为空");
         }
@@ -90,7 +90,7 @@ public class AdminUserVoService {
         if (vo.getConfirmPass() == null) {
             return JSONResult.error("确认密码禁止为空");
         }
-        return adminUserService.addAdminUser(vo);
+        return adminUserService.addAdminUser(vo, id);
     }
 
     public JSONResult deleteByIds(String ids, Long id) {
@@ -112,7 +112,7 @@ public class AdminUserVoService {
         return null;
     }
 
-    public JSONResult updateAdminUser(UpdateAdminUserVo vo) throws Exception {
+    public JSONResult updateAdminUser(UpdateAdminUserVo vo, Long id) throws Exception {
         if (vo.getId() == null) {
             throw new Exception("参数丢失");
         }
@@ -128,6 +128,6 @@ public class AdminUserVoService {
         if (vo.getDescription() == null || "".equals(vo.getDescription())) {
             return JSONResult.error("账号描述禁止为空");
         }
-        return adminUserService.updateAdminUser(vo);
+        return adminUserService.updateAdminUser(vo, id);
     }
 }

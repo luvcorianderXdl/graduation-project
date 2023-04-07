@@ -101,8 +101,10 @@ public class AdminUserController {
 
     @RequestMapping("/addAdminUser")
     @ResponseBody
-    public Object addAdminUser(AddAdminUserVo vo) {
-        return adminUserVoService.addAdminUser(vo);
+    public Object addAdminUser(HttpServletRequest req, AddAdminUserVo vo) {
+        HttpSession session = req.getSession();
+        AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
+        return adminUserVoService.addAdminUser(vo, adminUser.getId());
     }
 
     @RequestMapping("/deleteByIds")
@@ -115,9 +117,11 @@ public class AdminUserController {
 
     @RequestMapping("/updateAdminUser")
     @ResponseBody
-    public Object updateAdminUser(UpdateAdminUserVo vo) {
+    public Object updateAdminUser(HttpServletRequest req, UpdateAdminUserVo vo) {
         try {
-            return adminUserVoService.updateAdminUser(vo);
+            HttpSession session = req.getSession();
+            AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
+            return adminUserVoService.updateAdminUser(vo, adminUser.getId());
         } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();
