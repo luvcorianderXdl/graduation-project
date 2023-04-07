@@ -66,7 +66,7 @@ public class SectionService {
         Timestamp createTime = DateUtil.getCurrentTimestamp();
         section.setCreateTime(createTime);
         section.setModifyUserId(id);
-        section.setModifyTime(null);
+        section.setModifyTime(createTime);
         section.setUseFlag(1);
         sectionRepository.save(section);
         return JSONResult.ok("板块添加完毕");
