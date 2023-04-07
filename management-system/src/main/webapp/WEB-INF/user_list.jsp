@@ -43,7 +43,7 @@
                 , {field: 'openid', title: '唯一标识'}
                 , {field: 'createTime', title: '创建时间', width: 170}
                 , {field: 'modifyTime', title: '修改时间', width: 170}
-                , {field: 'deleteUserId', title: '删除人', width: 80}
+                , {field: 'modifyUserId', title: '修改人', width: 80}
                 , {
                     field: 'useFlag', title: '状态', templet: function (d) {
                         return d.useFlag === 1 ? '正常' : '已删除';
