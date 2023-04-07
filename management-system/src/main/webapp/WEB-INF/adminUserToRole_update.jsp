@@ -46,19 +46,19 @@
 </form>
 <script>
     function submitForm() {
-        var roles = [];
+        var roleIds = [];
         $('input[type="checkbox"]').each(function () {
             var value = $(this).val();
             var checked = $(this).prop('checked');
             if (checked) {
-                roles.push(value);
+                roleIds.push(value);
             }
         });
-        if (roles.length === 0) {
-            roles = null;
+        if (roleIds.length === 0) {
+            roleIds = null;
         }
         var vo = {
-            roles: roles,
+            roleIds: roleIds,
             adminUserId:<%=vos.get(0).getAdminUserId()%>
         };
         $.post(

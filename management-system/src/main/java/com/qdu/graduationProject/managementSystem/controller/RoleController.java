@@ -76,7 +76,14 @@ public class RoleController {
         HttpSession session = req.getSession();
         AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
         return roleVoService.addRole(vo, adminUser.getId());
+    }
 
+    @RequestMapping("/deleteByIds")
+    @ResponseBody
+    public Object deleteByIds(HttpServletRequest req, String ids) {
+        HttpSession session = req.getSession();
+        AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
+        return roleVoService.deleteByIds(ids, adminUser.getId());
     }
 
 }

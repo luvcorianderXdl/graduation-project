@@ -27,7 +27,7 @@ public class AdminUserToRoleVoService {
 
     public List<AdminUserToRoleTableInfoVo> getPageInfo(Long adminUserId) {
         List<Long> ids = adminUserToRoleService.getRoleIdsByAdminUserId(adminUserId);
-        List<Role> roles = roleService.getAllRoles();
+        List<Role> roles = roleService.getAllByUseFlag();
         List<AdminUserToRoleTableInfoVo> vos = new ArrayList<>();
         roles.forEach(role -> {
             AdminUserToRoleTableInfoVo vo = new AdminUserToRoleTableInfoVo();
@@ -49,6 +49,6 @@ public class AdminUserToRoleVoService {
         if (vo.getAdminUserId() == null) {
             throw new Exception("参数丢失");
         }
-        return adminUserToRoleService.updateAdminUserToRole(vo.getRoles(), vo.getAdminUserId());
+        return adminUserToRoleService.updateAdminUserToRole(vo.getRoleIds(), vo.getAdminUserId());
     }
 }

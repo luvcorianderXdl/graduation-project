@@ -24,12 +24,12 @@ public class AdminUserToRoleService {
         return adminUserToRoleRepository.getRoleIdsByAdminUserId(id);
     }
 
-    public JSONResult updateAdminUserToRole(List<Long> roles, Long adminUserId) {
+    public JSONResult updateAdminUserToRole(List<Long> roleIds, Long adminUserId) {
         //根据id删除
         adminUserToRoleRepository.deleteAdminUserToRolesByAdminUserId(adminUserId);
         //重新添加
-        if (roles != null && !roles.isEmpty()) {
-            roles.forEach(roleId -> {
+        if (roleIds != null && !roleIds.isEmpty()) {
+            roleIds.forEach(roleId -> {
                 AdminUserToRole temp = new AdminUserToRole();
                 temp.setRoleId(roleId);
                 temp.setAdminUserId(adminUserId);

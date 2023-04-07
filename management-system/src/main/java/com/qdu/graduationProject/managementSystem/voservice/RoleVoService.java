@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author xdl
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RoleVoService {
     @Resource
     private RoleService roleService;
-    
+
     public LayUITableJSONResult getByPage(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String pageNo = req.getParameter("page");
         String pageSize = req.getParameter("limit");
@@ -58,5 +60,17 @@ public class RoleVoService {
             return JSONResult.error("描述禁止为空");
         }
         return roleService.addRole(vo, id);
+    }
+
+    public JSONResult deleteByIds(String ids, Long id) {
+        if (ids == null || "".equals(ids)) {
+            return JSONResult.error("请选择用户");
+        }
+        String[] temp = ids.split(",");
+        List<Long> idList = new ArrayList<>();
+        for (String s : temp) {
+            idList.add(Long.parseLong(s));
+        }
+        return roleService.deleteById(idList, id);
     }
 }

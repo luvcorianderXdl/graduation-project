@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class UpdateAdminUserToRoleVo {
-    List<Long> roles;
+    List<Long> roleIds;
 
     Long adminUserId;
 }

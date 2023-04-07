@@ -37,4 +37,7 @@ public class Role {
 
     @Column(name = "modify_user_id")
     private Long modifyUserId;
+
+    @Column(name = "use_flag")
+    private Integer useFlag;
 }

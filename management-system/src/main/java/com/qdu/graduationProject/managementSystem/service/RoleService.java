@@ -55,11 +55,17 @@ public class RoleService {
         role.setCreateTime(DateUtil.getCurrentTimestamp());
         role.setModifyTime(null);
         role.setModifyUserId(id);
+        role.setUseFlag(1);
         roleRepository.save(role);
         return JSONResult.ok("添加成功");
     }
 
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    public List<Role> getAllByUseFlag() {
+        return roleRepository.getAllByUseFlag(1);
+    }
+
+    public JSONResult deleteById(List<Long> idList, Long id) {
+        roleRepository.deleteByIds(id, idList, DateUtil.getCurrentTimestamp());
+        return JSONResult.ok("删除成功");
     }
 }
