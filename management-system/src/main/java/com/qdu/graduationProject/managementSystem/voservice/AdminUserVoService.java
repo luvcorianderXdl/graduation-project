@@ -5,6 +5,7 @@ import com.qdu.graduationProject.commonUtils.utils.JSONUtil;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.service.AdminUserService;
+import com.qdu.graduationProject.managementSystem.service.AdminUserToRoleService;
 import com.qdu.graduationProject.managementSystem.vo.AddAdminUserVo;
 import com.qdu.graduationProject.managementSystem.vo.UpdateAdminUserVo;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ public class AdminUserVoService {
 
     @Resource
     private AdminUserService adminUserService;
+
+    @Resource
+    private AdminUserToRoleService adminUserToRoleService;
 
     public void login(HttpServletRequest req, HttpServletResponse resp) {
         String loginId = req.getParameter("loginId");
@@ -53,7 +57,8 @@ public class AdminUserVoService {
 
     public LayUITableJSONResult getByPage(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         AdminUser adminUser = (AdminUser) req.getSession().getAttribute("adminUser");
-        if (adminUser.getId() == 1) {
+        List<Long> roles = adminUserToRoleService.getRoleIdsByAdminUserId(adminUser.getId());
+        if (roles != null && roles.contains(3L)) {
             String pageNo = req.getParameter("page");
             String pageSize = req.getParameter("limit");
             if (pageNo == null || pageNo.equals("")) {
@@ -64,7 +69,7 @@ public class AdminUserVoService {
             }
             return adminUserService.getByPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
         } else {
-            return LayUITableJSONResult.error("非超级管理员");
+            return LayUITableJSONResult.error("暂无数据");
         }
     }
 

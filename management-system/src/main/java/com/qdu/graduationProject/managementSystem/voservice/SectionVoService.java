@@ -3,7 +3,9 @@ package com.qdu.graduationProject.managementSystem.voservice;
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.commonUtils.utils.UrlPrefixUtil;
+import com.qdu.graduationProject.managementSystem.entity.AdminUser;
 import com.qdu.graduationProject.managementSystem.entity.Section;
+import com.qdu.graduationProject.managementSystem.service.AdminUserToRoleService;
 import com.qdu.graduationProject.managementSystem.service.SectionService;
 import com.qdu.graduationProject.managementSystem.vo.AddSectionVo;
 import com.qdu.graduationProject.managementSystem.vo.UpdateSectionVo;
@@ -25,20 +27,29 @@ public class SectionVoService {
     @Resource
     private SectionService sectionService;
 
+    @Resource
+    private AdminUserToRoleService adminUserToRoleService;
+
     public LayUITableJSONResult getByPage(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        String pageNo = req.getParameter("page");
-        String pageSize = req.getParameter("limit");
-        if (pageNo == null || pageNo.equals("")) {
-            pageNo = "1";
+        AdminUser adminUser = (AdminUser) req.getSession().getAttribute("adminUser");
+        List<Long> roles = adminUserToRoleService.getRoleIdsByAdminUserId(adminUser.getId());
+        if (roles != null && roles.contains(2L)) {
+            String pageNo = req.getParameter("page");
+            String pageSize = req.getParameter("limit");
+            if (pageNo == null || pageNo.equals("")) {
+                pageNo = "1";
+            }
+            if (pageSize == null || pageSize.equals("")) {
+                pageSize = "10";
+            }
+            LayUITableJSONResult layUITableJSONResult = sectionService.getByPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
+            ((List<Section>) layUITableJSONResult.getData()).forEach(r -> {
+                r.setSectionImage(UrlPrefixUtil.getFullSectionPrefix() + r.getSectionImage());
+            });
+            return layUITableJSONResult;
+        } else {
+            return LayUITableJSONResult.error("暂无数据");
         }
-        if (pageSize == null || pageSize.equals("")) {
-            pageSize = "10";
-        }
-        LayUITableJSONResult layUITableJSONResult = sectionService.getByPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
-        ((List<Section>) layUITableJSONResult.getData()).forEach(r -> {
-            r.setSectionImage(UrlPrefixUtil.getFullSectionPrefix() + r.getSectionImage());
-        });
-        return layUITableJSONResult;
     }
 
     public JSONResult deleteByIds(String ids, Long id) {

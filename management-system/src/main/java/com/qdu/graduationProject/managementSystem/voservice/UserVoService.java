@@ -2,6 +2,8 @@ package com.qdu.graduationProject.managementSystem.voservice;
 
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
+import com.qdu.graduationProject.managementSystem.entity.AdminUser;
+import com.qdu.graduationProject.managementSystem.service.AdminUserToRoleService;
 import com.qdu.graduationProject.managementSystem.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +23,25 @@ public class UserVoService {
     @Resource
     private UserService userService;
 
+    @Resource
+    private AdminUserToRoleService adminUserToRoleService;
+
     public LayUITableJSONResult getByPage(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        String pageNo = req.getParameter("page");
-        String pageSize = req.getParameter("limit");
-        if (pageNo == null || pageNo.equals("")) {
-            pageNo = "1";
+        AdminUser adminUser = (AdminUser) req.getSession().getAttribute("adminUser");
+        List<Long> roles = adminUserToRoleService.getRoleIdsByAdminUserId(adminUser.getId());
+        if (roles != null && roles.contains(1L)) {
+            String pageNo = req.getParameter("page");
+            String pageSize = req.getParameter("limit");
+            if (pageNo == null || pageNo.equals("")) {
+                pageNo = "1";
+            }
+            if (pageSize == null || pageSize.equals("")) {
+                pageSize = "10";
+            }
+            return userService.getByPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
+        } else {
+            return LayUITableJSONResult.error("暂无数据");
         }
-        if (pageSize == null || pageSize.equals("")) {
-            pageSize = "10";
-        }
-        return userService.getByPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
     }
 
     public JSONResult deleteByIds(String ids, Long id) {
