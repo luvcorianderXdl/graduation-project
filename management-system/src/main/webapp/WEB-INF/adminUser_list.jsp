@@ -24,7 +24,6 @@
             elem: '#test'
             , url: '${pageContext.request.contextPath}/adminUser/selectByPage'
             , toolbar: '#toolbarDemo'
-            // , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'id', title: 'ID', sort: true, width: 50}

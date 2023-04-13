@@ -12,17 +12,28 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class LayUITableJSONResult {
+
     public static final int ERROR = 1;
     public static final int OK = 0;
 
-    // 当前状态（程序员判断状态）:成功、失败、未登录、没有权限
-    // 当前登录是成功还是失败要告诉前台，前台才能知道弹出的提示框用errorMsg、okMsg
+    /**
+     * 当前登录是成功还是失败要告诉前台，前台才能知道弹出的提示框用errorMsg、okMsg
+     */
     private Integer code;
-    // 描述信息（主要是给用户看的提示信息）
+
+    /**
+     * 描述信息（主要是给用户看的提示信息）
+     */
     private String msg;
-    // 后台返回给前端的数据 Object， User、List<User>
+
+    /**
+     * 后台返回给前端的数据 Object
+     */
     private Object data;
-    // 总的数量
+
+    /**
+     * 总数
+     */
     private Integer count;
 
     public LayUITableJSONResult(Integer code) {

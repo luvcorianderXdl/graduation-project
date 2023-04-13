@@ -1,17 +1,22 @@
 package com.qdu.graduationProject.commonUtils.utils;
 
-// JSON格式的通用响应对象，封装的就是后台返回给前台的所有信息
+/**
+ * JSON格式的通用响应对象，封装的就是后台返回给前台的所有信息
+ */
 public class JSONResult {
     public static final int ERROR = 1;
     public static final int OK = 0;
-    public static final int NO_PERMISSTION = 2;
-
-    // 当前状态（程序员判断状态）:成功、失败、未登录、没有权限
-    // 当前登录是成功还是失败要告诉前台，前台才能知道弹出的提示框用errorMsg、okMsg
+    /**
+     * 当前登录是成功还是失败要告诉前台，前台才能知道弹出的提示框用errorMsg、okMsg
+     */
     private Integer code;
-    // 描述信息（主要是给用户看的提示信息）
+    /**
+     * 描述信息（主要是给用户看的提示信息）
+     */
     private String msg;
-    // 后台返回给前端的数据 Object， User、List<User>
+    /**
+     * 后台返回给前端的数据 Object， User、List<User>
+     */
     private Object data;
 
     // ok

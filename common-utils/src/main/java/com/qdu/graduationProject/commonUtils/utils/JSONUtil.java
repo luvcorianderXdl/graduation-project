@@ -14,8 +14,7 @@ public class JSONUtil {
     private JSONUtil() {
 
     }
-
-    // Student  Map   List
+    
     public static void toJson(HttpServletResponse resp, Object obj) {
         try {
             resp.setContentType("text/html;charset=utf-8");
