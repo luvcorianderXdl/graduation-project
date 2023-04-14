@@ -22,5 +22,4 @@ public class WebConfigurer implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/adminUser/login", "/adminUser/getLoginPage", "/auth/code", "/error", "/static/**");
     }
-
 }

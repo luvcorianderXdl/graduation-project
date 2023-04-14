@@ -35,4 +35,7 @@ public interface SectionRepository extends JpaRepository<Section, Long> {
     @Modifying
     @Query(value = "update s_section set section_name = :sectionName,description =:description,section_image = :sectionImage,modify_time = :modifyTime,modify_user_id =:modifyUserId where id = :id", nativeQuery = true)
     void updateSection(@Param("id") Long id, @Param("sectionName") String sectionName, @Param("description") String description, @Param("sectionImage") String sectionImage, @Param("modifyTime") Timestamp modifyTime, @Param("modifyUserId") Long modifyUserId);
+
+    @Query(value = "select section_image from s_section where use_flag = 1", nativeQuery = true)
+    List<String> getImagesByUseFlag();
 }

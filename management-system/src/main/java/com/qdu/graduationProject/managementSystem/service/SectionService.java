@@ -80,4 +80,8 @@ public class SectionService {
         sectionRepository.updateSection(vo.getId(), vo.getSectionName(), vo.getDescription(), vo.getSectionImage(), DateUtil.getCurrentTimestamp(), id);
         return JSONResult.ok("修改成功");
     }
+
+    public List<String> getImagesByUseFlag() {
+        return sectionRepository.getImagesByUseFlag();
+    }
 }
