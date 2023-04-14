@@ -11,21 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
-
-//    // 配置虚拟路径
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/pic/**")
-//                .addResourceLocations("file:/D:/mypic/");
-//        WebMvcConfigurer.super.addResourceHandlers(registry);
-//    }
-
-
-    // 拦截器注册
+    /**
+     * 拦截器注册
+     * addPathPatterns("/**") 表示拦截所有的请求
+     * excludePathPatterns()   代表排除哪些请求不需要拦截
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // addPathPatterns("/**") 表示拦截所有的请求
-        // excludePathPatterns()   代表排除哪些请求不需要拦截
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/adminUser/login", "/adminUser/getLoginPage", "/auth/code", "/error", "/static/**");

@@ -17,9 +17,11 @@ import javax.servlet.http.HttpSession;
 public class LoginInterceptor implements HandlerInterceptor {
 
     public static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
-
-    // 返回true：代表已经登录，就可以访问后台资源
-    // 返回false：代表没有登录，请求被拦截
+    
+    /**
+     * 返回true：代表已经登录，就可以访问后台资源
+     * 返回false：代表没有登录，请求被拦截
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         logger.info("LoginInterceptor.preHandle");

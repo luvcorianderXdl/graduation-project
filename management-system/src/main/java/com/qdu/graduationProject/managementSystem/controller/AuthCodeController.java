@@ -27,8 +27,7 @@ public class AuthCodeController {
     private char[] codeSequence = {'A', '1', 'B', 'C', '2', 'D', '3', 'E', '4', 'F', '5', 'G', '6', 'H', '7', 'I', '8', 'J',
             'K', '9', 'L', '1', 'M', '2', 'N', 'P', '3', 'Q', '4', 'R', 'S', 'T', 'U', 'V', 'W',
             'X', 'Y', 'Z'};
-
-    // /auth/code
+    
     @RequestMapping("/code")
     public void getCode(HttpServletResponse response, HttpSession session) throws IOException {
         int width = 63;

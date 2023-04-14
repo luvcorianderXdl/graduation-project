@@ -60,11 +60,12 @@ public class AdminUserController {
     @RequestMapping("/login")
     @ResponseBody
     public void login(HttpServletRequest req, HttpServletResponse resp) {
-//        String code = req.getParameter("code");
+        //取出用户传递的验证码
+        String code = req.getParameter("code");
+        //取出正确验证码
         HttpSession session = req.getSession();
         String codeInSession = (String) session.getAttribute("codeInSession");
-        //删除下边这行
-        String code = (String) session.getAttribute("codeInSession");
+        //比对
         if (!code.equalsIgnoreCase(codeInSession)) {
             JSONUtil.toJson(resp, JSONResult.error("验证码错误"));
         } else {
