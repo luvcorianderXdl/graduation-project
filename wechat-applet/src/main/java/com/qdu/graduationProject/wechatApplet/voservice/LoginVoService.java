@@ -2,14 +2,10 @@ package com.qdu.graduationProject.wechatApplet.voservice;
 
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
-import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.WXResultCode;
 import com.qdu.graduationProject.wechatApplet.vo.LoginRequestVo;
 import com.qdu.graduationProject.wechatApplet.vo.LoginResponseVo;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 
 
