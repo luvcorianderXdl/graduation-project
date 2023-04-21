@@ -30,4 +30,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void deleteByIds(@Param("ids") List<Long> ids, @Param("modifyUserId") Long modifyUserId, @Param("modifyTime") Timestamp deleteTime);
 
     Page<User> findAllByOrderByUseFlagDesc(Pageable pageable);
+
+    List<User> getByOpenidInAndUseFlag(List<String> openIds, int useFlag);
 }
