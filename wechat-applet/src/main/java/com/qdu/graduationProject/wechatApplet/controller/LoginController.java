@@ -19,12 +19,13 @@ public class LoginController {
 
     @RequestMapping("/getSession")
     @ResponseBody
-    public void getSession(HttpServletResponse resp,@RequestBody LoginRequestVo vo) {
+    public String getSession(@RequestBody LoginRequestVo vo) {
         try {
-            loginVoService.getSessionId(resp,vo);
+            return loginVoService.getSessionId(vo);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 }

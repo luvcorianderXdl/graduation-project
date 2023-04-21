@@ -16,28 +16,21 @@ import java.io.IOException;
 @Service
 public class LoginVoService {
 
-    public JSONResult getSessionId( HttpServletResponse resp,LoginRequestVo reqVo) throws Exception {
+    public String getSessionId(LoginRequestVo reqVo) throws Exception {
         //构造url并请求
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid={0}&secret={1}&js_code={2}&grant_type={3}";
         String replaceUrl = url.replace("{0}",reqVo.getAppid()).replace("{1}",reqVo.getSecret()).replace("{2}", reqVo.getCode()).replace("{3}",reqVo.getGrantType());
         String res = HttpUtil.get(replaceUrl);
+        System.out.println(reqVo);
         LoginResponseVo respVo = JSONUtil.toBean(res,LoginResponseVo.class);
 
         //TODO 打印结果看看后面删除
         System.out.println(respVo.toString());
 
-        //写回数据
-        resp.setContentType("application/json");
-        try {
-            resp.getWriter().write(res);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         //如果出错，通过返回的错误码识别错误信息
         if(respVo.getErrcode()!=0){
-            throw new Exception(WXResultCode.getErrorMessage(respVo.getErrcode()));
+            respVo.setErrmsg(WXResultCode.getErrorMessage(respVo.getErrcode()));
         }
-        return JSONResult.ok(res);
+        return JSONUtil.toJsonStr(respVo);
     }
 }
