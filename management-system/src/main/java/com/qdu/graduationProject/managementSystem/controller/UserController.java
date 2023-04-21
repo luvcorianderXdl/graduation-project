@@ -45,4 +45,15 @@ public class UserController {
         AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
         return userVoService.deleteByIds(ids, adminUser.getId());
     }
+
+    @RequestMapping("/getByOpenId")
+    @ResponseBody
+    public void getByName(HttpServletRequest req, HttpServletResponse resp, String openId) {
+        try {
+            LayUITableJSONResult result = userVoService.getByPageAndOpenId(req, resp, openId);
+            JSONUtil.toJson(resp, result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

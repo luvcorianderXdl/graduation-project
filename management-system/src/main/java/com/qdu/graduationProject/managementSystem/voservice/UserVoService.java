@@ -3,6 +3,7 @@ package com.qdu.graduationProject.managementSystem.voservice;
 import com.qdu.graduationProject.commonUtils.utils.JSONResult;
 import com.qdu.graduationProject.commonUtils.utils.LayUITableJSONResult;
 import com.qdu.graduationProject.managementSystem.entity.AdminUser;
+import com.qdu.graduationProject.managementSystem.entity.User;
 import com.qdu.graduationProject.managementSystem.service.AdminUserToRoleService;
 import com.qdu.graduationProject.managementSystem.service.UserService;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -54,5 +56,27 @@ public class UserVoService {
             idList.add(Long.parseLong(s));
         }
         return userService.deleteById(idList, id);
+    }
+
+    public LayUITableJSONResult getByPageAndOpenId(HttpServletRequest req, HttpServletResponse resp, String openId) throws Exception {
+        AdminUser adminUser = (AdminUser) req.getSession().getAttribute("adminUser");
+        List<Long> roles = adminUserToRoleService.getRoleIdsByAdminUserId(adminUser.getId());
+        if (roles != null && roles.contains(1L)) {
+            if (openId == null || "".equals(openId)) {
+                return LayUITableJSONResult.error("暂无数据");
+            }
+            List<String> openIds = new ArrayList<>();
+            Collections.addAll(openIds, openId.split(","));
+            List<User> users = userService.getByOpenId(openIds);
+            if (users != null) {
+                LayUITableJSONResult result = new LayUITableJSONResult();
+                result.setCode(0);
+                result.setData(users);
+                result.setMsg("查询成功");
+                result.setCount(1);
+                return result;
+            }
+        }
+        return LayUITableJSONResult.error("暂无数据");
     }
 }

@@ -55,4 +55,8 @@ public class UserService {
         userRepository.deleteByIds(ids, id, modifyTime);
         return JSONResult.ok("已删除");
     }
+
+    public List<User> getByOpenId(List<String> openIds) throws Exception {
+        return userRepository.getByOpenidInAndUseFlag(openIds, 1);
+    }
 }

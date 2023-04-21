@@ -9,17 +9,50 @@
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+<style>
+    .toolbar-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .layui-btn-container {
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+
+    .layui-input-block {
+        display: flex;
+        align-items: center;
+        padding-top: 10px;
+        margin-top: 0;
+    }
+
+    .layui-input-block input {
+        margin-right: 10px;
+    }
+</style>
+
 <script type="text/html" id="toolbarDemo">
-    <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="deleteAll">批量删除</button>
+    <div class="toolbar-container">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="deleteAll">批量删除</button>
+        </div>
+        <div class="layui-input-block">
+            <input type="text" name="openId" id="openId" value="" autocomplete="off" style="width: 150px;height: 35px"
+                   placeholder="请输入openId英文逗号分割"
+                   class="layui-input">
+            <button class="layui-btn layui-btn-sm" id="search" lay-event="search">搜索</button>
+        </div>
     </div>
 </script>
+
 <script>
     layui.use('table', function () {
         var table = layui.table;
-        table.render({
+        var initUrl = '${pageContext.request.contextPath}/user/selectByPage';
+        var myTable = table.render({
             elem: '#test'
-            , url: '${pageContext.request.contextPath}/user/selectByPage'
+            , url: initUrl
             , toolbar: '#toolbarDemo'
             // , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
@@ -53,6 +86,24 @@
             ]]
             , page: true
             , id: 'tableId'
+        });
+        document.getElementById('search').addEventListener('click', function () {
+            var openId = $('#openId').val();
+            var newUrl = '${pageContext.request.contextPath}/user/getByOpenId?openId=' + openId;
+            myTable.reload({
+                url: newUrl,
+                method: 'POST',
+                where: {
+                    // 传递其他参数（如果需要）
+                },
+                page: {
+                    curr: 1, // 重置为第一页
+                },
+                done: function () {
+                    // 恢复初始URL
+                    myTable.config.url = initUrl;
+                }
+            });
         });
         //行工具条
         table.on('tool(layFilter)', function (obj) {
@@ -109,12 +160,17 @@
                         );
                     });
                     break;
+                <%--case 'search' :--%>
+                <%--    var openId = $('#openId').val();--%>
+                <%--    table.reload('#test', {--%>
+                <%--        url: '${pageContext.request.contextPath}/user/getByOpenId?openId=' + openId--%>
+                <%--    });--%>
+                <%--    break;--%>
                 case 'LAYTABLE_TIPS':
                     layer.alert('这是工具栏右侧自定义的一个图标按钮');
                     break;
             }
         });
-
     });
 </script>
 </body>
