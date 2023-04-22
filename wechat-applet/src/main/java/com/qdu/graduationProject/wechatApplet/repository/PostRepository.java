@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Section,Long> {
 
-    @Query(value = "select * from s_section ",nativeQuery = true)
+    @Query(value = "select * from s_section where use_flag = 1",nativeQuery = true)
     List<Section> getAllSection();
+
 
 }
