@@ -1,13 +1,11 @@
 package com.qdu.graduationProject.wechatApplet.vo;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class GridListVo {
     long id;

@@ -1,7 +1,7 @@
 package com.qdu.graduationProject.wechatApplet.controller;
 
-import com.qdu.graduationProject.wechatApplet.entity.Section;
-import com.qdu.graduationProject.wechatApplet.service.PostService;
+import com.qdu.graduationProject.wechatApplet.vo.GridListVo;
+import com.qdu.graduationProject.wechatApplet.voservice.PostVoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,11 +13,11 @@ import java.util.List;
 @RequestMapping("/getPost")
 public class PostController {
     @Resource
-    private PostService postService;
+    private PostVoService postVoService;
 
     @RequestMapping("/getGridList")
     @ResponseBody
-    public List<Section> getAllSection() {
-        return postService.getAllSection();
+    public List<GridListVo> getAllSection() {
+        return postVoService.getGridList();
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginVoService {
 
-    public String getSessionId(LoginRequestVo reqVo) throws Exception {
+    public String getSessionId(LoginRequestVo reqVo) {
         //构造url并请求
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid={0}&secret={1}&js_code={2}&grant_type={3}";
         String replaceUrl = url.replace("{0}",reqVo.getAppid()).replace("{1}",reqVo.getSecret()).replace("{2}", reqVo.getCode()).replace("{3}",reqVo.getGrantType());
