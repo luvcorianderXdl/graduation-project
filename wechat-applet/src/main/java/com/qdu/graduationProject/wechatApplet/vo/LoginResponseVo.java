@@ -1,5 +1,6 @@
 package com.qdu.graduationProject.wechatApplet.vo;
 
+import com.qdu.graduationProject.wechatApplet.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,5 +16,5 @@ public class LoginResponseVo {
     String errmsg;//错误信息
     String openid;//用户唯一标识
     int errcode;//错误码
-
+    User userInfo;
 }
